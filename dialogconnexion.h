@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "clientwindow.h"
+#include "technicienwindow.h"
 
 namespace Ui {
 class DialogConnexion;
@@ -18,6 +19,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_IdentificationClient_clicked();
 
 private:
     Ui::DialogConnexion *ui;

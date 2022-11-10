@@ -20,19 +20,22 @@ SOURCES += \
     dialogconnexion.cpp \
     dialognouveauticket.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    technicienwindow.cpp
 
 HEADERS += \
     clientwindow.h \
     dialogconnexion.h \
     dialognouveauticket.h \
-    mainwindow.h
+    mainwindow.h \
+    technicienwindow.h
 
 FORMS += \
     clientwindow.ui \
     dialogconnexion.ui \
     dialognouveauticket.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    technicienwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

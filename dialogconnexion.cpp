@@ -18,5 +18,12 @@ void DialogConnexion::on_pushButton_clicked()
 {
     ClientWindow *window = new ClientWindow(parentWidget());
     window->show();
-    hide();
+    close();
+}
+
+void DialogConnexion::on_IdentificationClient_clicked()
+{
+    Technicienwindow *window = new Technicienwindow(parentWidget());
+    window->show();
+    close();
 }

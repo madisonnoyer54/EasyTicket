@@ -13,7 +13,7 @@ ClientWindow::~ClientWindow()
     delete ui;
 }
 
-void ClientWindow::on_pushButton_clicked()
+void ClientWindow::on_nouveauTicket_clicked()
 {
     DialogNouveauTicket *dialog = new DialogNouveauTicket(this);
     dialog->show();

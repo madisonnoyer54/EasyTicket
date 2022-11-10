@@ -17,7 +17,7 @@ public:
     ~ClientWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_nouveauTicket_clicked();
 
 private:
     Ui::ClientWindow *ui;
