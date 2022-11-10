@@ -1,6 +1,7 @@
 #ifndef UTILISATEUR_H
 #define UTILISATEUR_H
 
+// Pour la gestion de l'identifiant
 #include <string>
 
 /** @brief La classe Utilisateur est la classe qui permet de crée differents utilisateur tel que les clients et les technicien
