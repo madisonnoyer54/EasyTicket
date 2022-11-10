@@ -16,6 +16,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    DialogConnexion* dialog = new DialogConnexion();
+    DialogConnexion* dialog = new DialogConnexion(this);
+    dialog->setModal(true);
     dialog->show();
+    centralWidget()->hide();
 }

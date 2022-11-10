@@ -13,3 +13,10 @@ DialogConnexion::~DialogConnexion()
 {
     delete ui;
 }
+
+void DialogConnexion::on_pushButton_clicked()
+{
+    ClientWindow *window = new ClientWindow(parentWidget());
+    window->show();
+    hide();
+}
