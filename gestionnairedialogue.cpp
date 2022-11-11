@@ -7,7 +7,9 @@ GestionnaireDialogue::GestionnaireDialogue()
 
 GestionnaireDialogue::~GestionnaireDialogue()
 {
-
+    for(const auto& kv : listUtilisateurs) {
+        delete kv.second;
+    }
 }
 
 Client* GestionnaireDialogue::getClient(std::string identifiant){
@@ -55,6 +57,64 @@ Technicien* GestionnaireDialogue::getTechnicien(std::string identifiant){
 
 std::map<std::string, Utilisateur*> GestionnaireDialogue::getUtilisateurs() const {
     return listUtilisateurs;
+}
+
+void GestionnaireDialogue::assignerTicket(Ticket* ticket) {
+
+    // On regarde l'ensemble des utilisateurs actuels
+    for(const auto& kv : listUtilisateurs) {
+
+        // Si l'utilisateur est un technicien
+        // et qu'il peut traiter le ticket
+        // On lui assigne le ticket
+        // Sinon on passe à l'utilisateur suivant
+        if(!kv.second->estUnClient() && ticket->getTechnicien() == 0) {
+            Technicien* technicien = (Technicien*) kv.second;
+            if(technicien->peutTraiter(ticket)) {
+                technicien->setTicket(ticket);
+            }
+        }
+    }
+
+    // Si le ticket n'a pas trouvé de technicien apte à
+    // le traiter, on l'ajoute dans une file d'attente
+    if(ticket->getTechnicien() == nullptr) {
+        fileTicket.push(ticket);
+    }
+}
+
+void GestionnaireDialogue::assignerTicket(Technicien* technicien) {
+    std::queue<Ticket*> nouvelleFile;
+
+    // On chercher un ticket dans la file que pourrait
+    // traiter le technicien
+    while(!fileTicket.empty() && technicien->getTicket() == nullptr) {
+        Ticket* t = fileTicket.front();
+        if(technicien->peutTraiter(t)) {
+
+            // Si le ticket peut être gérer on le donne au technicien
+            // ce qui nous fait sortir de la boucle
+            technicien->setTicket(t);
+        } else {
+            // Sinon on ajout le ticket à une autre file
+
+            nouvelleFile.push(t);
+        }
+
+        // On défile le premier élement de la file principale
+        fileTicket.pop();
+    }
+
+    // On reconstruit la file sans changer l'ordre des éléments
+    // Pour cela on continu de défiler la pile principal en enfilant
+    // Dans une autre file
+    while(!fileTicket.empty()) {
+        nouvelleFile.push(fileTicket.front());
+        fileTicket.pop();
+    }
+
+    // On change la file actuelle par la nouvelle file
+    fileTicket = nouvelleFile;
 }
 
 std::ostream& operator<<(std::ostream& os, GestionnaireDialogue const& dialog) {

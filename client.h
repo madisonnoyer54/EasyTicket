@@ -43,7 +43,7 @@ class Client : public Utilisateur
         /// @param informations Les informations du ticket
         ///
         /// @param categorie La categorie du ticket
-        void nouveauTicket(std::string informations, Categorie categorie);
+        Ticket* nouveauTicket(std::string informations, Categorie categorie);
 
         /// @brief La méthode qui permet de connaitre la liste des tickets que possède l'utilisateur
         ///

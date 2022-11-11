@@ -26,7 +26,7 @@ class Ticket
 
         /// @brief Variable qui contient l'information ouvert/fermer du ticket
         /// Vrai sur le ticket est ouvert, faux sinon
-        bool ouvert = true;
+        bool ouvert;
 
         /// @brief Variable qui contient les informations du ticket
         std::string informations;
@@ -86,8 +86,20 @@ class Ticket
 
         /// @brief La méthode qui permet de définir la categorie d'un ticket
         ///
-        /// @param La nouvelle categorie du ticket
+        /// @param categorie La nouvelle categorie du ticket
         void setCategorie(Categorie categorie);
+
+        /// @brief La méthode qui permet de connaitre le
+        /// technicien qui gère le ticket
+        ///
+        /// @return Le tehcnicien qui gère le ticket
+        Technicien* getTechnicien() const;
+
+        /// @brief La méthode qui permet de définir le technicien
+        /// qui va gérer le ticket
+        ///
+        /// @param technicien Le nouveau technicien du ticket
+        void setTechnicien(Technicien* technicien);
     };
 
 /// @brief Fonction qui permet d'afficher un ticket sur la sortie standard

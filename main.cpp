@@ -14,22 +14,35 @@ int main(int argc, char *argv[])
     // Et nous les affichons sur la sortie standard
     GestionnaireDialogue* gestionnaire = new GestionnaireDialogue();
 
-    Client* client = gestionnaire->getClient("Josephine");
-    client->nouveauTicket("Mon disque dur prend feu apres avoir utilise votre logiciel. Je ne comprend pas....", Categorie::materiel);
-    client->nouveauTicket("Apres avoir ecrit que j'avais un probleme avec mon disque dur, je ne vois que des pubs pour des disques durs... Il y aurait-il une fuite de donnees ??", Categorie::securite);
-
     Technicien* technicien = gestionnaire->getTechnicien("Joseph");
-    technicien->setTicket(client->getTickets()[1]);
+    technicien->addCategorie(Categorie::materiel);
+    technicien->addCategorie(Categorie::assistance);
+
+    technicien = gestionnaire->getTechnicien("Mariane");
+    technicien->addCategorie(Categorie::logiciel);
+    technicien->addCategorie(Categorie::securite);
+
+    Client* client = gestionnaire->getClient("Josephine");
+    Ticket* ticket = client->nouveauTicket("Mon disque dur prend feu apres avoir utilise votre logiciel. Je ne comprend pas....", Categorie::materiel);
+    gestionnaire->assignerTicket(ticket);
+    ticket = client->nouveauTicket("Apres avoir ecrit que j'avais un probleme avec mon disque dur, je ne vois que des pubs pour des disques durs... Il y aurait-il une fuite de donnees ??", Categorie::securite);
+    gestionnaire->assignerTicket(ticket);
 
     // On vérifie si ça ne créer pas un nouveau client à la place de nous rendre Josephine
     client = gestionnaire->getClient("Josephine");
-    client->nouveauTicket("Je n'arrive pas a utiliser votre logiciel suite a sa mise a jour, j'ai besoins d'aide !", Categorie::assistance);
+    ticket = client->nouveauTicket("Je n'arrive pas a utiliser votre logiciel suite a sa mise a jour, j'ai besoins d'aide !", Categorie::assistance);
+    gestionnaire->assignerTicket(ticket);
 
     std::cout << *gestionnaire << std::endl;
 
     std::cout << "-------------- Apres fermeture --------------" << std::endl;
 
     technicien->fermerTicket();
+    gestionnaire->assignerTicket(technicien);
+
+    technicien = gestionnaire->getTechnicien("Joseph");
+    technicien->fermerTicket();
+    gestionnaire->assignerTicket(technicien);
 
     std::cout << *gestionnaire << std::endl;
 

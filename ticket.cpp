@@ -2,7 +2,7 @@
 
 Ticket::Ticket(std::string informations, Categorie categorie) : informations(informations), categorie(categorie)
 {
-
+    ouvert = true;
 }
 
 Ticket::~Ticket(){
@@ -41,8 +41,16 @@ void Ticket::setCategorie(Categorie categorie) {
     this->categorie = categorie;
 }
 
+Technicien* Ticket::getTechnicien() const {
+    return technicien;
+}
+
+void Ticket::setTechnicien(Technicien* technicien) {
+    this->technicien = technicien;
+}
+
 std::ostream& operator<<(std::ostream& os, Ticket const& ticket) {
-    os << "[" << ticket.getIdTicket() << "] <" << ticket.getCategorie() << "> " << ticket.getInformations() << " : " << (ticket.estOuvert() ? "Ouvert" : "Fermer");
+    os << "[" << ticket.getIdTicket() << "] <" << ticket.getCategorie() << "> " << ticket.getInformations() << " : " << ((ticket.estOuvert()) ? "Ouvert" : "Fermer");
 
     return os;
 }
