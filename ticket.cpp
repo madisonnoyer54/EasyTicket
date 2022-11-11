@@ -42,7 +42,7 @@ void Ticket::setCategorie(Categorie categorie) {
 }
 
 std::ostream& operator<<(std::ostream& os, Ticket const& ticket) {
-    os << "[" << ticket.getCategorie() << "] " << ticket.getInformations() << " : " << (ticket.estOuvert() ? "Ouvert" : "Fermer");
+    os << "[" << ticket.getIdTicket() << "] <" << ticket.getCategorie() << "> " << ticket.getInformations() << " : " << (ticket.estOuvert() ? "Ouvert" : "Fermer");
 
     return os;
 }

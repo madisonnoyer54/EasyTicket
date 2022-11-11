@@ -10,7 +10,12 @@ Client::~Client()
 }
 
 void Client::nouveauTicket(std::string informations, Categorie categorie){
-    listTickets.push_back(new Ticket(informations, categorie));
+    Ticket* ticket = new Ticket(informations, categorie);
+
+    // Id du ticket qui sera l'identifiant de l'utilisateur suivis d'un numéro
+
+    ticket->setIdTicket(idUtilisateur + std::to_string(prochainIdTicket++));
+    listTickets.push_back(ticket);
 }
 
 

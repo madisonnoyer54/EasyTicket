@@ -24,6 +24,8 @@ class Client : public Utilisateur
     private:
         /// @brief Variable qui contient la liste des tickets du client
         std::vector<Ticket*> listTickets;
+        /// @brief Id du prochain ticket
+        int prochainIdTicket = 0;
 
     public:
         /// @brief Le constructeur qui va appeler

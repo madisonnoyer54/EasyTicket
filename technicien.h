@@ -25,7 +25,7 @@ class Technicien : public Utilisateur
 
         /// @brief Variable qui contient la/les catégorie(s) du Technicien
         /// Une catégorie définie les differentes action que le technicien peut effectuer sur le ticket
-        Categorie lesCategories[4];
+        Categorie categories[4] = {Categorie::assistance, Categorie::logiciel, Categorie::securite, Categorie::materiel};
 
     public:
         /// @brief Le constructeur
@@ -39,6 +39,17 @@ class Technicien : public Utilisateur
         ///
         /// @return Le ticket que possede le technicien
         Ticket *getTicket() const;
+
+        /// @brief La méthode qui permet d'assigner un ticket à un technicien
+        ///
+        /// @param ticket Le ticket que va traiter le technicien
+        void setTicket(Ticket* ticket);
+
+        /// @briefLa méthode qui permet de connaitre les catégories gérées par
+        /// le technicien
+        ///
+        /// @return une constante contenant les Categories
+        const Categorie* getCategories() const;
 
         /// @brief La méthode qui permet de fermer le ticket que gère le technicien
         void fermerTicket();
