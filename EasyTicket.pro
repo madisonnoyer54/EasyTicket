@@ -21,14 +21,26 @@ SOURCES += \
     dialognouveauticket.cpp \
     main.cpp \
     mainwindow.cpp \
-    technicienwidget.cpp
+    technicienwidget.cpp \
+    categorie.cpp \
+    client.cpp \
+    gestionnairedialogue.cpp \
+    technicien.cpp \
+    ticket.cpp \
+    utilisateur.cpp
 
 HEADERS += \
     clientwidget.h \
     connexionwidget.h \
     dialognouveauticket.h \
     mainwindow.h \
-    technicienwidget.h
+    technicienwidget.h \
+    categorie.h \
+    client.h \
+    gestionnairedialogue.h \
+    technicien.h \
+    ticket.h \
+    utilisateur.h
 
 FORMS += \
     clientwidget.ui \
