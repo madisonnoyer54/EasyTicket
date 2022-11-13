@@ -28,6 +28,7 @@ void TechnicienWidget::setTechnicien(Technicien *technicien) {
     technicien->addCategorie(Categorie::securite);
     technicien->addCategorie(Categorie::logiciel);
     gestionnaire->assignerTicket(technicien);
+    parentWidget()->setWindowTitle("EasyTicket - Technicien : " + technicien->getId());
 }
 
 void TechnicienWidget::on_fermerTicket_clicked()

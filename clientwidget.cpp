@@ -31,6 +31,7 @@ void ClientWidget::setGestionnaire(GestionnaireDialogue *gestionnaire) {
 
 void ClientWidget::setClient(Client *client) {
     this->client = client;
+    parentWidget()->setWindowTitle("EasyTicket - Client : " + client->getId());
     reagir();
 }
 

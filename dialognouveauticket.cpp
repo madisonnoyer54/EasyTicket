@@ -6,6 +6,7 @@ DialogNouveauTicket::DialogNouveauTicket(QWidget *parent) :
     ui(new Ui::DialogNouveauTicket)
 {
     ui->setupUi(this);
+    setWindowTitle("Nouveau Ticket");
 }
 
 DialogNouveauTicket::~DialogNouveauTicket()
