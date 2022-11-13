@@ -7,8 +7,6 @@
 #include "technicien.h"
 /// Permet de gérer une hashmap d'utilisateur
 #include <map>
-/// Permet de gérer la file d'attente des tickets n'ayant pas de Technicien
-#include <queue>
 
 /** @brief La classe GestionnaireDialogue est la classe qui permet d'interagir avec les différents utilisateurs
  **
@@ -22,7 +20,7 @@ class GestionnaireDialogue
        /// @brief Variable qui contient la hashmap des utilisateurs par rapport à leur identifiant
        std::map<std::string, Utilisateur*> listUtilisateurs;
        /// @brief Variable qui contient la file d'attente des tickets non traité
-       std::queue<Ticket*> fileTicket;
+       std::vector<Ticket*> fileTicket;
 
     public:
         /// @brief Le constructeur

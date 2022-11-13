@@ -35,7 +35,7 @@ class Ticket
         Categorie categorie;
 
         /// @brief Variable qui désigne le technicien qui s'occupe du ticket
-        Technicien* technicien;
+        Technicien* technicien = nullptr;
 
 
     public:
@@ -52,7 +52,7 @@ class Ticket
         /// @brief La méthode permet de retourner l'identifiant du ticket
         ///
         /// @return L'identifiant du ticket
-        std::string getIdTicket() const;
+        const std::string getIdTicket() const;
 
         /// @brief La méthode permet de changer le numéro du ticket
         ///
@@ -72,7 +72,7 @@ class Ticket
         /// @brief La méthode permet de connaitre les informations d'un ticket
         ///
         /// @return Les informations donné par le client sur le ticket
-        std::string getInformations() const;
+        const std::string getInformations() const;
 
         /// @brief La méthode permet de définir des informations pour rapport à un ticket
         ///

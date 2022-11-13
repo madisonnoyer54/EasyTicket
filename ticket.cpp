@@ -17,7 +17,7 @@ bool Ticket::estOuvert() const {
     return ouvert;
 }
 
-std::string Ticket::getIdTicket() const {
+const std::string Ticket::getIdTicket() const {
     return idTicket;
 }
 
@@ -25,7 +25,7 @@ void Ticket::fermer(){
     ouvert = false;
 }
 
-std::string Ticket::getInformations() const {
+const std::string Ticket::getInformations() const {
     return informations;
 }
 
@@ -50,6 +50,7 @@ void Ticket::setTechnicien(Technicien* technicien) {
 }
 
 std::ostream& operator<<(std::ostream& os, Ticket const& ticket) {
+
     os << "[" << ticket.getIdTicket() << "] <" << ticket.getCategorie() << "> " << ticket.getInformations() << " : " << ((ticket.estOuvert()) ? "Ouvert" : "Fermer");
 
     return os;

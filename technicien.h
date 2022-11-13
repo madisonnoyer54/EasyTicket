@@ -23,7 +23,7 @@ class Technicien : public Utilisateur
 {
     private:
         /// @brief Variable qui contient le ticket utiliser par le technicien
-        Ticket *ticket;
+        Ticket* ticket = nullptr;
 
         /// @brief Variable qui contient la/les catégorie(s) du Technicien
         /// Une catégorie définie les differentes action que le technicien peut effectuer sur le ticket
@@ -53,7 +53,7 @@ class Technicien : public Utilisateur
         /// @brief La méthode qui permet d'assigner un ticket à un technicien
         ///
         /// @param ticket Le ticket que va traiter le technicien
-        void setTicket(Ticket* ticket);
+        void setTicket(Ticket& ticket);
 
         /// @brief La méthode qui permet de connaitre les catégories gérées par
         /// le technicien
@@ -84,7 +84,7 @@ class Technicien : public Utilisateur
         ///
         /// @return true si le technicien ne traite pas déjà un ticket
         /// et que le ticket correspond à ses catégories
-        bool peutTraiter(Ticket* ticket);
+        bool peutTraiter(Ticket& ticket);
 };
 
 /// @brief Fonction qui permet d'afficher un technicien sur la sortie standard
