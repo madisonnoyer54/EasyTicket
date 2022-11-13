@@ -15,6 +15,7 @@ TechnicienWidget::~TechnicienWidget()
 
 void TechnicienWidget::setGestionnaire(GestionnaireDialogue *gestionnaire) {
     this->gestionnaire = gestionnaire;
+    gestionnaire->addObserveur(this);
 }
 
 void TechnicienWidget::setTechnicien(Technicien *technicien) {
@@ -27,15 +28,12 @@ void TechnicienWidget::setTechnicien(Technicien *technicien) {
     technicien->addCategorie(Categorie::securite);
     technicien->addCategorie(Categorie::logiciel);
     gestionnaire->assignerTicket(technicien);
-    reagir();
 }
 
 void TechnicienWidget::on_fermerTicket_clicked()
 {
     technicien->fermerTicket();
     gestionnaire->assignerTicket(technicien);
-    reagir();
-    std::cout << "----- Apres fermeture ---- \n" << *gestionnaire;
 }
 
 void TechnicienWidget::reagir() {

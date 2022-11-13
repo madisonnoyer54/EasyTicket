@@ -21,6 +21,7 @@ SOURCES += \
     dialognouveauticket.cpp \
     main.cpp \
     mainwindow.cpp \
+    objetobserve.cpp \
     technicienwidget.cpp \
     categorie.cpp \
     client.cpp \
@@ -34,6 +35,8 @@ HEADERS += \
     connexionwidget.h \
     dialognouveauticket.h \
     mainwindow.h \
+    objetobserve.h \
+    observeur.h \
     technicienwidget.h \
     categorie.h \
     client.h \

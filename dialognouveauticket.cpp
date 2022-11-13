@@ -23,12 +23,11 @@ void DialogNouveauTicket::setClient(Client *client) {
 
 void DialogNouveauTicket::on_buttonBox_accepted()
 {
-    Categorie c;
+    Categorie c = Categorie::assistance;
     if(ui->Assistance->isChecked()) c = Categorie::assistance;
     if(ui->Logiciel->isChecked()) c = Categorie::logiciel;
     if(ui->Materiel->isChecked()) c = Categorie::materiel;
     if(ui->Securite->isChecked()) c = Categorie::securite;
     gestionnaire->assignerTicket(&client->nouveauTicket(ui->informationsText->toPlainText(), c));
-    std::cout << "------ Ajout d'un ticket ------ \n" << *gestionnaire;
 }
 

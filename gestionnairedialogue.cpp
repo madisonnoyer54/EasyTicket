@@ -78,6 +78,7 @@ void GestionnaireDialogue::assignerTicket(Ticket* ticket) {
     if(ticket->getTechnicien() == nullptr) {
         fileTicket.push_back(ticket);
     }
+    notifier();
 }
 
 void GestionnaireDialogue::assignerTicket(Technicien* technicien) {
@@ -89,6 +90,7 @@ void GestionnaireDialogue::assignerTicket(Technicien* technicien) {
     }
     if(technicien->getTicket() != nullptr)
         fileTicket.erase(std::remove(fileTicket.begin(), fileTicket.end(), technicien->getTicket()));
+    notifier();
 }
 
 std::ostream& operator<<(std::ostream& os, GestionnaireDialogue const& dialog) {

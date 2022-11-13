@@ -5,6 +5,9 @@
 #include "client.h"
 /// Permet de retourner un objet de type Technicien pour la fonction getTechnicien
 #include "technicien.h"
+/// permet de définir la class GestionnaireDialogue comme un objet qui fera
+/// réagir les classes de l'interface graphique
+#include "objetobserve.h"
 /// Permet de gérer une hashmap d'utilisateur
 #include <QMap>
 
@@ -14,7 +17,7 @@
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
-class GestionnaireDialogue
+class GestionnaireDialogue : public ObjetObserve
 {
     private:
        /// @brief Variable qui contient la hashmap des utilisateurs par rapport à leur identifiant
