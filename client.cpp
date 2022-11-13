@@ -1,6 +1,6 @@
-#include "client.h"
+ #include "client.h"
 
-Client::Client(std::string identifiant) : Utilisateur(identifiant)
+Client::Client(QString identifiant) : Utilisateur(identifiant)
 {
 }
 
@@ -11,14 +11,13 @@ Client::~Client()
     }
 }
 
-Ticket& Client::nouveauTicket(std::string informations, Categorie categorie){
+Ticket& Client::nouveauTicket(QString informations, Categorie categorie){
     Ticket* ticket = new Ticket(informations, categorie);
 
     // Id du ticket qui sera l'identifiant de l'utilisateur suivis d'un numéro
 
-    ticket->setIdTicket(idUtilisateur + std::to_string(prochainIdTicket++));
+    ticket->setIdTicket(idUtilisateur + QString::number(prochainIdTicket++));
     listTickets.push_back(ticket);
-    std::cout << ticket << " : " << *ticket << std::endl;
 
     return *ticket;
 }
@@ -33,7 +32,7 @@ bool Client::estUnClient() {
 }
 
 std::ostream& operator<<(std::ostream& os, Client const& client) {
-    os << "[Client] " << client.getId() << " {" << std::endl;
+    os << "[Client] " << client.getId().toUtf8().constData() << " {" << std::endl;
     for(const Ticket* ticket : client.getTickets()) {
         os << "\t" << *ticket << ", " << std::endl;
     }

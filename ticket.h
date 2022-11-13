@@ -2,7 +2,7 @@
 #define TICKET_H
 
 // Pour la gestion de l'identifiant
-#include <string>
+#include <QString>
 #include "categorie.h"
 #include "technicien.h"
 
@@ -22,14 +22,14 @@ class Ticket
 
     private:
         /// @brief Variable qui contient le numéro du ticket
-        std::string idTicket;
+        QString idTicket;
 
         /// @brief Variable qui contient l'information ouvert/fermer du ticket
         /// Vrai sur le ticket est ouvert, faux sinon
         bool ouvert;
 
         /// @brief Variable qui contient les informations du ticket
-        std::string informations;
+        QString informations;
 
         /// @brief Variable qui désigne la catégorie du ticket
         Categorie categorie;
@@ -44,7 +44,7 @@ class Ticket
         ///
         /// @param informations Informations rentré par le client sur le ticket
         /// @param categorie Categorie du ticket choisis par le client
-        Ticket(std::string informations, Categorie categorie);
+        Ticket(QString informations, Categorie categorie);
 
         /// @brief le destructeur ne fait rien
         ~Ticket();
@@ -52,12 +52,12 @@ class Ticket
         /// @brief La méthode permet de retourner l'identifiant du ticket
         ///
         /// @return L'identifiant du ticket
-        const std::string getIdTicket() const;
+        const QString getIdTicket() const;
 
         /// @brief La méthode permet de changer le numéro du ticket
         ///
         /// @param id Le nouvel identifiant du ticket
-        void setIdTicket(std::string id);
+        void setIdTicket(QString id);
 
         /// @brief La méthode permet de savoir si le ticket est ouvert ou non.
         ///
@@ -72,12 +72,12 @@ class Ticket
         /// @brief La méthode permet de connaitre les informations d'un ticket
         ///
         /// @return Les informations donné par le client sur le ticket
-        const std::string getInformations() const;
+        const QString getInformations() const;
 
         /// @brief La méthode permet de définir des informations pour rapport à un ticket
         ///
         /// @param Les nouvelles informations par rapport à un ticket
-        void setInformations(std::string informations);
+        void setInformations(QString informations);
 
         /// @brief La méthode qui permet de connaitre la categorie d'un ticket
         ///

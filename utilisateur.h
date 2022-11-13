@@ -2,7 +2,7 @@
 #define UTILISATEUR_H
 
 // Pour la gestion de l'identifiant
-#include <string>
+#include <QString>
 
 /** @brief La classe Utilisateur est la classe mère de toutes les implémentations de utilisateur (Client et Technicien).
  *
@@ -16,11 +16,11 @@ class Utilisateur
 {
     protected:
         /// @brief Variable qui contient l'identifiant de l'utilisateur
-        std::string idUtilisateur;
+        QString idUtilisateur;
 
         /// @brief Le constructeur qui assigne le paramètre
         /// idUtilisateur au champs idUtilisateur
-        Utilisateur(std::string idUtilisateur);
+        Utilisateur(QString idUtilisateur);
 
     public:
         /// @brief le destructeur ne fait rien, mais doit être
@@ -33,7 +33,7 @@ class Utilisateur
         /// sans le modifier.
         ///
         /// @return l'identifiant de l'utilisateur
-        std::string getId() const;
+        const QString getId() const;
 
         /// @brief La méthode qui permet de savoir si l'utilisateur est un client
         ///

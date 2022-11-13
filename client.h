@@ -32,7 +32,7 @@ class Client : public Utilisateur
         /// le constructeur de Utilisateur
         ///
         /// @param identifiant L'identifiant de l'utilisateur
-        Client(std::string identifiant);
+        Client(QString identifiant);
 
         /// @brief le destructeur
         ~Client();
@@ -43,7 +43,7 @@ class Client : public Utilisateur
         /// @param informations Les informations du ticket
         ///
         /// @param categorie La categorie du ticket
-        Ticket& nouveauTicket(std::string informations, Categorie categorie);
+        Ticket& nouveauTicket(QString informations, Categorie categorie);
 
         /// @brief La méthode qui permet de connaitre la liste des tickets que possède l'utilisateur
         ///

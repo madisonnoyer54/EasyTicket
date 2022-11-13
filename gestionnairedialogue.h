@@ -18,7 +18,7 @@ class GestionnaireDialogue
 {
     private:
        /// @brief Variable qui contient la hashmap des utilisateurs par rapport à leur identifiant
-       std::map<std::string, Utilisateur*> listUtilisateurs;
+       std::map<QString, Utilisateur*> listUtilisateurs;
        /// @brief Variable qui contient la file d'attente des tickets non traité
        std::vector<Ticket*> fileTicket;
 
@@ -34,19 +34,19 @@ class GestionnaireDialogue
         /// @param identifiant Identifiant du client
         ///
         /// @return Le client possèdant l'identifiant entré en paramètre
-        Client* getClient(std::string identifiant);
+        Client* getClient(QString identifiant);
 
         /// @brief La méthode qui permet de retourner le technicien par rapport à son identifiant
         ///
         /// @param identifiant Identifiant du technicien
         ///
         /// @return Le technicien possédant l'identifiant entré en paramètre
-        Technicien* getTechnicien(std::string identifiant);
+        Technicien* getTechnicien(QString identifiant);
 
         /// @brief La méthode qui permet d'avoir la map des utilisateurs
         ///
         /// @return Map contenant tout les utilisateurs
-        std::map<std::string, Utilisateur*> getUtilisateurs() const;
+        std::map<QString, Utilisateur*> getUtilisateurs() const;
 
         /// @brief La méthode qui permet d'assigner un ticket à un Technicien
         /// ou a le mettre en file d'attente si il faut

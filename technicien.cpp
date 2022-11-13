@@ -1,9 +1,9 @@
 #include "technicien.h"
 
-Technicien::Technicien(std::string identifiant): Utilisateur(identifiant) {
+Technicien::Technicien(QString identifiant): Utilisateur(identifiant) {
 }
 
-Technicien::Technicien(std::string identifiant, std::vector<Categorie> categories) : Utilisateur(identifiant), categories(categories) {
+Technicien::Technicien(QString identifiant, std::vector<Categorie> categories) : Utilisateur(identifiant), categories(categories) {
 }
 
 Technicien::~Technicien() {
@@ -58,7 +58,7 @@ bool Technicien::peutTraiter(Ticket& ticket) {
 }
 
 std::ostream& operator<<(std::ostream& os, Technicien const& technicien) {
-    os << "[Technicien] " << technicien.getId() << " {" << std::endl;
+    os << "[Technicien] " << technicien.getId().toUtf8().constData() << " {" << std::endl;
     os << "\tCategories : ";
     for(Categorie categorie : technicien.getCategories()) os << categorie << ", ";
     os << "\n";

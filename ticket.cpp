@@ -1,6 +1,6 @@
 #include "ticket.h"
 
-Ticket::Ticket(std::string informations, Categorie categorie) : informations(informations), categorie(categorie)
+Ticket::Ticket(QString informations, Categorie categorie) : informations(informations), categorie(categorie)
 {
     ouvert = true;
 }
@@ -9,7 +9,7 @@ Ticket::~Ticket(){
 
 }
 
-void Ticket::setIdTicket(std::string id) {
+void Ticket::setIdTicket(QString id) {
     idTicket = id;
 }
 
@@ -17,7 +17,7 @@ bool Ticket::estOuvert() const {
     return ouvert;
 }
 
-const std::string Ticket::getIdTicket() const {
+const QString Ticket::getIdTicket() const {
     return idTicket;
 }
 
@@ -25,11 +25,11 @@ void Ticket::fermer(){
     ouvert = false;
 }
 
-const std::string Ticket::getInformations() const {
+const QString Ticket::getInformations() const {
     return informations;
 }
 
-void Ticket::setInformations(std::string informations) {
+void Ticket::setInformations(QString informations) {
     this->informations = informations;
 }
 
@@ -51,7 +51,7 @@ void Ticket::setTechnicien(Technicien* technicien) {
 
 std::ostream& operator<<(std::ostream& os, Ticket const& ticket) {
 
-    os << "[" << ticket.getIdTicket() << "] <" << ticket.getCategorie() << "> " << ticket.getInformations() << " : " << ((ticket.estOuvert()) ? "Ouvert" : "Fermer");
+    os << "[" << ticket.getIdTicket().toUtf8().constData() << "] <" << ticket.getCategorie() << "> " << ticket.getInformations().toUtf8().constData() << " : " << ((ticket.estOuvert()) ? "Ouvert" : "Fermer");
 
     return os;
 }

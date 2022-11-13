@@ -12,7 +12,7 @@ GestionnaireDialogue::~GestionnaireDialogue()
     }
 }
 
-Client* GestionnaireDialogue::getClient(std::string identifiant){
+Client* GestionnaireDialogue::getClient(QString identifiant){
 
     // La map possède t'elle une valeur pour l'identifiant ?
 
@@ -34,7 +34,7 @@ Client* GestionnaireDialogue::getClient(std::string identifiant){
     return res;
 }
 
-Technicien* GestionnaireDialogue::getTechnicien(std::string identifiant){
+Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
     // La map possède t'elle une valeur pour l'identifiant ?
 
     if(listUtilisateurs.count(identifiant)) {
@@ -55,7 +55,7 @@ Technicien* GestionnaireDialogue::getTechnicien(std::string identifiant){
     return res;
 }
 
-std::map<std::string, Utilisateur*> GestionnaireDialogue::getUtilisateurs() const {
+std::map<QString, Utilisateur*> GestionnaireDialogue::getUtilisateurs() const {
     return listUtilisateurs;
 }
 

@@ -33,14 +33,14 @@ class Technicien : public Utilisateur
         /// @brief Le constructeur
         ///
         /// @param identifiant L'identifiant du technicien
-        Technicien(std::string identifiant);
+        Technicien(QString identifiant);
 
         /// @brief Le constructeur
         ///
         /// @param identifiant L'identifiant du technicien
         ///
         /// @param categories Les categories du technicien
-        Technicien(std::string identifiant, std::vector<Categorie> categories);
+        Technicien(QString identifiant, std::vector<Categorie> categories);
 
         /// @brief le destructeur ne fait rien
         ~Technicien();
