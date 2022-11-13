@@ -7,9 +7,6 @@ GestionnaireDialogue::GestionnaireDialogue()
 
 GestionnaireDialogue::~GestionnaireDialogue()
 {
-    for(const auto& kv : listUtilisateurs) {
-        delete kv.second;
-    }
 }
 
 Client* GestionnaireDialogue::getClient(QString identifiant){
@@ -55,14 +52,14 @@ Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
     return res;
 }
 
-std::map<QString, Utilisateur*> GestionnaireDialogue::getUtilisateurs() const {
+QMap<QString, Utilisateur*> GestionnaireDialogue::getUtilisateurs() const {
     return listUtilisateurs;
 }
 
 void GestionnaireDialogue::assignerTicket(Ticket* ticket) {
 
     // On regarde l'ensemble des utilisateurs actuels
-    for(const auto& kv : listUtilisateurs) {
+    for(const auto& kv : listUtilisateurs.toStdMap()) {
 
         // Si l'utilisateur est un technicien
         // et qu'il peut traiter le ticket
@@ -84,18 +81,19 @@ void GestionnaireDialogue::assignerTicket(Ticket* ticket) {
 }
 
 void GestionnaireDialogue::assignerTicket(Technicien* technicien) {
-    for(Ticket* ticket : fileTicket) {
+    for(int i = 0; i < fileTicket.count(); i++) {
+        Ticket* ticket = fileTicket[i];
         if(technicien->peutTraiter(*ticket) && ticket->estOuvert()) {
             technicien->setTicket(*ticket);
         }
     }
     if(technicien->getTicket() != nullptr)
-        fileTicket.erase(remove(fileTicket.begin(), fileTicket.end(), technicien->getTicket()));
+        fileTicket.erase(std::remove(fileTicket.begin(), fileTicket.end(), technicien->getTicket()));
 }
 
 std::ostream& operator<<(std::ostream& os, GestionnaireDialogue const& dialog) {
     // kv étant un couple key value, avec pour clé l'identifiant et value l'utilisateur
-    for(const auto& kv : dialog.getUtilisateurs()) {
+    for(const auto& kv : dialog.getUtilisateurs().toStdMap()) {
         if(kv.second->estUnClient())os << *(Client *const) kv.second;
         else os << *(Technicien *const) kv.second;
         os << std::endl;

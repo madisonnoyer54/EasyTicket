@@ -6,9 +6,6 @@ Client::Client(QString identifiant) : Utilisateur(identifiant)
 
 Client::~Client()
 {
-    for(Ticket* ticket : listTickets) {
-        delete ticket;
-    }
 }
 
 Ticket& Client::nouveauTicket(QString informations, Categorie categorie){
@@ -23,7 +20,7 @@ Ticket& Client::nouveauTicket(QString informations, Categorie categorie){
 }
 
 
-std::vector<Ticket*> Client::getTickets() const {
+QVector<Ticket*> Client::getTickets() const {
     return listTickets;
 }
 
@@ -33,7 +30,9 @@ bool Client::estUnClient() {
 
 std::ostream& operator<<(std::ostream& os, Client const& client) {
     os << "[Client] " << client.getId().toUtf8().constData() << " {" << std::endl;
-    for(const Ticket* ticket : client.getTickets()) {
+    QVector<Ticket*> tickets = client.getTickets();
+    for(int i = 0; i < tickets.size(); i++) {
+        Ticket* ticket = tickets[i];
         os << "\t" << *ticket << ", " << std::endl;
     }
     os << "}" << std::endl;

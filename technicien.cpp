@@ -3,7 +3,7 @@
 Technicien::Technicien(QString identifiant): Utilisateur(identifiant) {
 }
 
-Technicien::Technicien(QString identifiant, std::vector<Categorie> categories) : Utilisateur(identifiant), categories(categories) {
+Technicien::Technicien(QString identifiant, QVector<Categorie> categories) : Utilisateur(identifiant), categories(categories) {
 }
 
 Technicien::~Technicien() {
@@ -19,7 +19,7 @@ void Technicien::setTicket(Ticket& ticket) {
     ticket.setTechnicien(this);
 }
 
-const std::vector<Categorie> Technicien::getCategories() const {
+const QVector<Categorie> Technicien::getCategories() const {
     return categories;
 }
 
@@ -45,7 +45,8 @@ bool Technicien::peutTraiter(Ticket& ticket) {
     if(this->ticket == nullptr){
         // Le technicien ne traite pas un ticket
 
-        for(Categorie c : categories) {
+        for(int i = 0; i < categories.size(); i++) {
+            Categorie c = categories[i];
 
             // Si le ticket possède une catégorie similaire à celle du technicien,
             // alors on retourne vrai, sinon on passe à la

@@ -8,7 +8,7 @@
 /// Permet de définir le type Ticket au vecteur
 #include "ticket.h"
 /// Permet de gérer une liste de ticket
-#include <vector>
+#include <QVector>
 /// Permet de gérer l'affichage sur la sortie standard
 #include <iostream>
 
@@ -23,7 +23,7 @@ class Client : public Utilisateur
 {
     private:
         /// @brief Variable qui contient la liste des tickets du client
-        std::vector<Ticket*> listTickets;
+        QVector<Ticket*> listTickets;
         /// @brief Id du prochain ticket
         int prochainIdTicket = 0;
 
@@ -48,7 +48,7 @@ class Client : public Utilisateur
         /// @brief La méthode qui permet de connaitre la liste des tickets que possède l'utilisateur
         ///
         /// @return Un vecteur contenant la liste des tickets d'un utilisateur
-        std::vector<Ticket*> getTickets() const;
+        QVector<Ticket*> getTickets() const;
 
         /// @brief La méthode qui permet de savoir si l'utilisateur est un client
         ///

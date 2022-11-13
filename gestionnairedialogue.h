@@ -6,7 +6,7 @@
 /// Permet de retourner un objet de type Technicien pour la fonction getTechnicien
 #include "technicien.h"
 /// Permet de gérer une hashmap d'utilisateur
-#include <map>
+#include <QMap>
 
 /** @brief La classe GestionnaireDialogue est la classe qui permet d'interagir avec les différents utilisateurs
  **
@@ -18,9 +18,9 @@ class GestionnaireDialogue
 {
     private:
        /// @brief Variable qui contient la hashmap des utilisateurs par rapport à leur identifiant
-       std::map<QString, Utilisateur*> listUtilisateurs;
+       QMap<QString, Utilisateur*> listUtilisateurs;
        /// @brief Variable qui contient la file d'attente des tickets non traité
-       std::vector<Ticket*> fileTicket;
+       QVector<Ticket*> fileTicket;
 
     public:
         /// @brief Le constructeur
@@ -46,7 +46,7 @@ class GestionnaireDialogue
         /// @brief La méthode qui permet d'avoir la map des utilisateurs
         ///
         /// @return Map contenant tout les utilisateurs
-        std::map<QString, Utilisateur*> getUtilisateurs() const;
+        QMap<QString, Utilisateur*> getUtilisateurs() const;
 
         /// @brief La méthode qui permet d'assigner un ticket à un Technicien
         /// ou a le mettre en file d'attente si il faut

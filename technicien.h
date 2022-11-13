@@ -1,9 +1,13 @@
 #ifndef TECHNICIEN_H
 #define TECHNICIEN_H
 
+// Pour que la classe Technicien puisse hériter de utilisateur
 #include "utilisateur.h"
+// Pour que le technicien puisse connaitre un ticket
 #include "ticket.h"
-#include <vector>
+// Pour la liste de categorie
+#include <QVector>
+// Pour la suppression d'element dans la liste de categorie
 #include <algorithm>
 
 // Un Technicien connait un ticket, il faut donc déclarer
@@ -27,7 +31,7 @@ class Technicien : public Utilisateur
 
         /// @brief Variable qui contient la/les catégorie(s) du Technicien
         /// Une catégorie définie les differentes action que le technicien peut effectuer sur le ticket
-        std::vector<Categorie> categories;
+        QVector<Categorie> categories;
 
     public:
         /// @brief Le constructeur
@@ -40,7 +44,7 @@ class Technicien : public Utilisateur
         /// @param identifiant L'identifiant du technicien
         ///
         /// @param categories Les categories du technicien
-        Technicien(QString identifiant, std::vector<Categorie> categories);
+        Technicien(QString identifiant, QVector<Categorie> categories);
 
         /// @brief le destructeur ne fait rien
         ~Technicien();
@@ -59,7 +63,7 @@ class Technicien : public Utilisateur
         /// le technicien
         ///
         /// @return une constante contenant les Categories que peut gérer le technicien
-        const std::vector<Categorie> getCategories() const;
+        const QVector<Categorie> getCategories() const;
 
         ///@brief La méthode qui permet d'ajouter une catégorie à un technicien
         ///
