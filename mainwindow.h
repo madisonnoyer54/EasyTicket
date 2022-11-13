@@ -4,6 +4,7 @@
 #include <QMainWindow>
 // Permet d'afficher un dialog pour la connexion
 #include "dialogconnexion.h"
+#include "connexionwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -13,14 +14,13 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    public:
+        MainWindow(QWidget *parent = nullptr);
+        ~MainWindow();
 
-private slots:
-    void on_pushButton_clicked();
+    private:
+        Ui::MainWindow *ui;
+        ConnexionWidget *connexion;
 
-private:
-    Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

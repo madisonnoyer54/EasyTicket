@@ -7,18 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("EasyTicket");
+    connexion = new ConnexionWidget(this);
+    connexion->show();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-
-void MainWindow::on_pushButton_clicked()
-{
-    DialogConnexion* dialog = new DialogConnexion(this);
-    dialog->setModal(true);
-    dialog->show();
-    centralWidget()->hide();
 }
