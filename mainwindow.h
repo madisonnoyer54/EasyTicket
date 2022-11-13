@@ -2,8 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-// Permet d'afficher un dialog pour la connexion
-#include "dialogconnexion.h"
 #include "connexionwidget.h"
 
 QT_BEGIN_NAMESPACE
