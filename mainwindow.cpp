@@ -6,10 +6,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle("EasyTicket");
+    connexion = new ConnexionWidget(this);
+    connexion->show();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
