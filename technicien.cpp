@@ -32,8 +32,10 @@ void Technicien::removeCategorie(Categorie categorie) {
 }
 
 void Technicien::fermerTicket() {
-    ticket->fermer();
-    ticket = nullptr;
+    if(ticket != nullptr) {
+        ticket->fermer();
+        ticket = nullptr;
+    }
 }
 
 bool Technicien::estUnClient() {

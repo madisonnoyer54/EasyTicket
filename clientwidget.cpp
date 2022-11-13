@@ -16,6 +16,15 @@ ClientWidget::~ClientWidget()
 void ClientWidget::on_ajouterUnTicket_clicked()
 {
     DialogNouveauTicket *dialog = new DialogNouveauTicket(this);
+    dialog->setClient(client);
+    dialog->setGestionnaire(gestionnaire);
     dialog->show();
 }
 
+void ClientWidget::setGestionnaire(GestionnaireDialogue *gestionnaire) {
+    this->gestionnaire = gestionnaire;
+}
+
+void ClientWidget::setClient(Client *client) {
+    this->client = client;
+}

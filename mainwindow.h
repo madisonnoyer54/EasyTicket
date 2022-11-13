@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "connexionwidget.h"
+#include "gestionnairedialogue.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,10 +16,12 @@ class MainWindow : public QMainWindow
     public:
         MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
+        void setGestionnaire(GestionnaireDialogue *gestionnaire);
 
     private:
         Ui::MainWindow *ui;
         ConnexionWidget *connexion;
+        GestionnaireDialogue *gestionnaire;
 
 };
 #endif // MAINWINDOW_H

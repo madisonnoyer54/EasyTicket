@@ -15,3 +15,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::setGestionnaire(GestionnaireDialogue *gestionnaire) {
+    this->gestionnaire = gestionnaire;
+    connexion->setGestionnaire(gestionnaire);
+}

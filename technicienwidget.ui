@@ -46,25 +46,21 @@
      <rect>
       <x>5</x>
       <y>30</y>
-      <width>281</width>
-      <height>251</height>
+      <width>280</width>
+      <height>250</height>
      </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>280</width>
+      <height>250</height>
+     </size>
     </property>
     <property name="text">
      <string>Information du ticket</string>
     </property>
-   </widget>
-   <widget class="QLabel" name="fermerTicket">
-    <property name="geometry">
-     <rect>
-      <x>5</x>
-      <y>290</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Nom de l'auteur</string>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QListView" name="messageList">
@@ -78,7 +74,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="fermerTicket">
    <property name="geometry">
     <rect>
      <x>700</x>
