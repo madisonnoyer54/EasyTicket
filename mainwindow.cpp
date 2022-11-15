@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QLayout>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -8,7 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     setWindowTitle("EasyTicket");
     connexion = new ConnexionWidget(this);
-    connexion->show();
+    //connexion->show();
+    centralWidget()->layout()->addWidget(connexion);
 }
 
 MainWindow::~MainWindow()

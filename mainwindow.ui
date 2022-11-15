@@ -13,7 +13,13 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -27,15 +33,6 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionSe_d_connecter">
-   <property name="text">
-    <string>Se déconnecter</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+D</string>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections/>
