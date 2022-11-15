@@ -52,7 +52,7 @@ Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
     return res;
 }
 
-QMap<QString, Utilisateur*> GestionnaireDialogue::getUtilisateurs() const {
+const QMap<QString, Utilisateur*>& GestionnaireDialogue::getUtilisateurs() const {
     return listUtilisateurs;
 }
 

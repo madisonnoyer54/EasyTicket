@@ -20,7 +20,7 @@ Ticket& Client::nouveauTicket(QString informations, Categorie categorie){
 }
 
 
-QVector<Ticket*> Client::getTickets() const {
+const QVector<Ticket*>& Client::getTickets() const {
     return listTickets;
 }
 

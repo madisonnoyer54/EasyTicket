@@ -48,7 +48,7 @@ class Client : public Utilisateur
         /// @brief La méthode qui permet de connaitre la liste des tickets que possède l'utilisateur
         ///
         /// @return Un vecteur contenant la liste des tickets d'un utilisateur
-        QVector<Ticket*> getTickets() const;
+        const QVector<Ticket*>& getTickets() const;
 
         /// @brief La méthode qui permet de savoir si l'utilisateur est un client
         ///

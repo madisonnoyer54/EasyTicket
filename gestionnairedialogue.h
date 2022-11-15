@@ -49,7 +49,7 @@ class GestionnaireDialogue : public ObjetObserve
         /// @brief La méthode qui permet d'avoir la map des utilisateurs
         ///
         /// @return Map contenant tout les utilisateurs
-        QMap<QString, Utilisateur*> getUtilisateurs() const;
+        const QMap<QString, Utilisateur*>& getUtilisateurs() const;
 
         /// @brief La méthode qui permet d'assigner un ticket à un Technicien
         /// ou a le mettre en file d'attente si il faut
