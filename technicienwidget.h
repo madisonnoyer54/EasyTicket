@@ -49,7 +49,7 @@ class TechnicienWidget : public QWidget, Observeur
         /// le technicien
         void on_envoyer_clicked();
 
-public:
+    public:
         /// @brief Constructeur de widget
         ///
         /// @param parent Parent du widget
@@ -72,6 +72,20 @@ public:
         /// reagir les informations sur le ticket
         /// traité
         void reagir() override;
+
+    private:
+        /// @brief Methode qui permet d'afficher les informations du ticket sur l'affichage graphique
+        ///
+        /// Affichage de l'id du ticket, des informations et de la categorie
+        void afficheDonnee();
+
+        /// @brief Methode qui permet de desactiver les boutons et textinput
+        /// lors que le technicien n'a plus de ticket a traiter
+        void desactiver();
+
+        /// @brief Methode qui permet d'activer les boutons et textinput
+        /// lors que le technicien a un ticket a traiter
+        void activer();
 };
 
 #endif // TECHNICIENWIDGET_H

@@ -6,7 +6,6 @@ TechnicienWidget::TechnicienWidget(QWidget *parent) :
     ui(new Ui::TechnicienWidget)
 {
     ui->setupUi(this);
-    parent->layout()->addWidget(this);
 }
 
 TechnicienWidget::~TechnicienWidget()
@@ -51,45 +50,57 @@ void TechnicienWidget::on_changeCategorie_clicked()
 
 void TechnicienWidget::reagir() {
     if(technicien->getTicket() == nullptr) {
-        ui->ticketName->setText("");
-        ui->Assistance->setDisabled(true);
-        ui->Logiciel->setDisabled(true);
-        ui->Materiel->setDisabled(true);
-        ui->Securite->setDisabled(true);
-        ui->changeCategorie->setDisabled(true);
-        ui->fermerTicket->setDisabled(true);
-        ui->textMessage->setDisabled(true);
-        ui->envoyer->setDisabled(true);
-        ui->ticketInfo->setText("");
+        desactiver();
     } else {
-        Ticket *ticket = technicien->getTicket();
-        ui->ticketName->setText(ticket->getIdTicket());
-        ui->ticketInfo->setText(ticket->getInformations());
-        ui->Assistance->setEnabled(true);
-        ui->Logiciel->setEnabled(true);
-        ui->Materiel->setEnabled(true);
-        ui->Securite->setEnabled(true);
-        ui->changeCategorie->setEnabled(true);
-        ui->fermerTicket->setEnabled(true);
-        ui->textMessage->setEnabled(true);
-        ui->envoyer->setEnabled(true);
-        switch(ticket->getCategorie()) {
-            case Categorie::assistance:
-                    ui->Assistance->setChecked(true);
-                break;
-            case Categorie::logiciel:
-                    ui->Logiciel->setChecked(true);
-                break;
-            case Categorie::materiel:
-                    ui->Materiel->setChecked(true);
-                break;
-            case Categorie::securite:
-                    ui->Securite->setChecked(true);
-                break;
-        }
+        activer();
+        afficheDonnee();
     }
 }
 
+void TechnicienWidget::afficheDonnee() {
+    Ticket *ticket = technicien->getTicket();
+    ui->ticketName->setText(ticket->getIdTicket());
+    ui->ticketInfo->setText(ticket->getInformations());
+    switch(ticket->getCategorie()) {
+        case Categorie::assistance:
+                ui->Assistance->setChecked(true);
+            break;
+        case Categorie::logiciel:
+                ui->Logiciel->setChecked(true);
+            break;
+        case Categorie::materiel:
+                ui->Materiel->setChecked(true);
+            break;
+        case Categorie::securite:
+                ui->Securite->setChecked(true);
+            break;
+    }
+}
+
+void TechnicienWidget::desactiver() {
+    ui->ticketName->setText("");
+    ui->ticketInfo->setText("");
+    ui->textMessage->setText("");
+    ui->Assistance->setDisabled(true);
+    ui->Logiciel->setDisabled(true);
+    ui->Materiel->setDisabled(true);
+    ui->Securite->setDisabled(true);
+    ui->changeCategorie->setDisabled(true);
+    ui->fermerTicket->setDisabled(true);
+    ui->textMessage->setDisabled(true);
+    ui->envoyer->setDisabled(true);
+}
+
+void TechnicienWidget::activer() {
+    ui->Assistance->setEnabled(true);
+    ui->Logiciel->setEnabled(true);
+    ui->Materiel->setEnabled(true);
+    ui->Securite->setEnabled(true);
+    ui->changeCategorie->setEnabled(true);
+    ui->fermerTicket->setEnabled(true);
+    ui->textMessage->setEnabled(true);
+    ui->envoyer->setEnabled(true);
+}
 
 void TechnicienWidget::on_envoyer_clicked()
 {

@@ -49,7 +49,7 @@ class ConnexionWidget : public QWidget
         /// si c'est un technicien
         void on_connexion_clicked();
 
-    public:
+public:
         /// @brief Constructeur de ConnexionWidget
         ///
         /// @param parent Parent du widget

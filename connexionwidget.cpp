@@ -6,6 +6,8 @@ ConnexionWidget::ConnexionWidget(QWidget *parent) :
     ui(new Ui::ConnexionWidget)
 {
     ui->setupUi(this);
+    ui->progressBar->setVisible(false);
+    ui->errorLabel->setVisible(false);
 }
 
 ConnexionWidget::~ConnexionWidget()
@@ -15,19 +17,32 @@ ConnexionWidget::~ConnexionWidget()
 
 void ConnexionWidget::on_connexion_clicked()
 {
-    if(ui->Client->isChecked()) {
-        hide();
-        clientWidget = new ClientWidget(parentWidget());
-        clientWidget->setGestionnaire(gestionnaire);
-        clientWidget->setClient(gestionnaire->getClient(ui->identifiantText->toPlainText()));
-        parentWidget()->layout()->addWidget(clientWidget);
-    }
-    if(ui->Technicien->isChecked()) {
-        hide();
-        technitienWidget = new TechnicienWidget(parentWidget());
-        technitienWidget->setGestionnaire(gestionnaire);
-        technitienWidget->setTechnicien(gestionnaire->getTechnicien(ui->identifiantText->toPlainText()));
-        parentWidget()->layout()->addWidget(technitienWidget);
+    ui->progressBar->setVisible(true);
+    try{
+        if(ui->Client->isChecked()) {
+            ui->progressBar->setValue(30);
+            clientWidget = new ClientWidget(parentWidget());
+            clientWidget->setGestionnaire(gestionnaire);
+            ui->progressBar->setValue(60);
+            clientWidget->setClient(gestionnaire->getClient(ui->identifiantText->toPlainText()));
+            ui->progressBar->setValue(100);
+            hide();
+            parentWidget()->layout()->addWidget(clientWidget);
+        }
+        if(ui->Technicien->isChecked()) {
+            ui->progressBar->setValue(30);
+            technitienWidget = new TechnicienWidget(parentWidget());
+            technitienWidget->setGestionnaire(gestionnaire);
+            ui->progressBar->setValue(60);
+            technitienWidget->setTechnicien(gestionnaire->getTechnicien(ui->identifiantText->toPlainText()));
+            ui->progressBar->setValue(100);
+            hide();
+            parentWidget()->layout()->addWidget(technitienWidget);
+        }
+    } catch (UtilisateurNonTrouveException unte) {
+        ui->errorLabel->setVisible(true);
+        ui->progressBar->setVisible(false);
+        ui->errorLabel->setText(unte.getMessage());
     }
 }
 

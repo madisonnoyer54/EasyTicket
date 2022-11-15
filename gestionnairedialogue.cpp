@@ -16,19 +16,19 @@ Client* GestionnaireDialogue::getClient(QString identifiant){
     if(listUtilisateurs.count(identifiant)) {
 
         if(listUtilisateurs[identifiant]->estUnClient()) return (Client*) listUtilisateurs[identifiant];
-        // L'utilisateur n'est pas un client. On retourne null pour l'instant.
-        // A changer dans une prochaine version
-        else return nullptr;
+        throw UtilisateurNonTrouveException("le client : " + identifiant);
 
     }
 
-    // Aucun utilisateur possède cet identifiant, afin de tester
-    // Un nouveau client va être créé
-    Client* res = new Client(identifiant);
+    if(identifiant.startsWith("TEST")) {
+        // Aucun utilisateur possède cet identifiant, afin de tester
+        // Un nouveau client va être créé
+        Client* res = new Client(identifiant);
 
-    listUtilisateurs[identifiant] = res;
-
-    return res;
+        listUtilisateurs[identifiant] = res;
+        return res;
+    }
+    throw UtilisateurNonTrouveException("le client : " + identifiant);
 }
 
 Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
@@ -37,19 +37,20 @@ Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
     if(listUtilisateurs.count(identifiant)) {
 
         if(!listUtilisateurs[identifiant]->estUnClient()) return (Technicien*) listUtilisateurs[identifiant];
-        // L'utilisateur n'est pas un client. On retourne null pour l'instant.
-        // A changer dans une prochaine version
-        else return nullptr;
+        else throw UtilisateurNonTrouveException("le technicien : " + identifiant);
 
     }
 
-    // Aucun utilisateur possède cet identifiant, afin de tester
-    // Un nouveau client va être créé
-    Technicien* res = new Technicien(identifiant);
+    if(identifiant.startsWith("TEST")) {
+        // Aucun utilisateur possède cet identifiant, afin de tester
+        // Un nouveau client va être créé
+        Technicien* res = new Technicien(identifiant);
 
-    listUtilisateurs[identifiant] = res;
+        listUtilisateurs[identifiant] = res;
 
-    return res;
+        return res;
+    }
+    throw UtilisateurNonTrouveException("le technicien : " + identifiant);
 }
 
 const QMap<QString, Utilisateur*>& GestionnaireDialogue::getUtilisateurs() const {
