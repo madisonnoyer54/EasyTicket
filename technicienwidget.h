@@ -40,8 +40,14 @@ class TechnicienWidget : public QWidget, Observeur
         /// Ferme le ticket que traite actuellement le
         /// technicien
         void on_fermerTicket_clicked();
+        /// @brief Listener du bouton changer la categorie
+        /// Change la catégorie du ticket que traite actuellement le
+        /// technicien
+        void on_changeCategorie_clicked();
 
-    public:
+        void on_envoyer_clicked();
+
+public:
         /// @brief Constructeur de widget
         ///
         /// @param parent Parent du widget

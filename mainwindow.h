@@ -42,6 +42,5 @@ class MainWindow : public QMainWindow
         ///
         /// @param gestionnaire Modele du logiciel
         void setGestionnaire(GestionnaireDialogue *gestionnaire);
-
 };
 #endif // MAINWINDOW_H

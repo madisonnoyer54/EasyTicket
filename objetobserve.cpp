@@ -11,8 +11,8 @@ void ObjetObserve::notifier() {
     }
 }
 
-void ObjetObserve::addObserveur(Observeur *observeur) {
-    observeurs.push_back(observeur);
+void ObjetObserve::addObserveur(Observeur &observeur) {
+    observeurs.push_back(&observeur);
 }
 
 ObjetObserve::~ObjetObserve() {}

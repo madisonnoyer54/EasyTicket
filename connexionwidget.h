@@ -34,6 +34,10 @@ class ConnexionWidget : public QWidget
         Ui::ConnexionWidget *ui;
         /// @brief Variable contenant le modèle de le logiciel
         GestionnaireDialogue *gestionnaire;
+        /// @brief Widget d'affichage du technicien
+        TechnicienWidget *technitienWidget;
+        /// @brief Widget d'affichage du client
+        ClientWidget *clientWidget;
 
 
     private slots:

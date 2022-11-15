@@ -65,6 +65,9 @@
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarAlwaysOff</enum>
        </property>
+       <property name="tabChangesFocus">
+        <bool>true</bool>
+       </property>
        <property name="lineWrapMode">
         <enum>QTextEdit::NoWrap</enum>
        </property>

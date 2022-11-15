@@ -27,7 +27,7 @@ void ClientWidget::on_ajouterUnTicket_clicked()
 
 void ClientWidget::setGestionnaire(GestionnaireDialogue *gestionnaire) {
     this->gestionnaire = gestionnaire;
-    gestionnaire->addObserveur(this);
+    gestionnaire->addObserveur(*this);
 }
 
 void ClientWidget::setClient(Client *client) {

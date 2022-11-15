@@ -12,13 +12,24 @@
 class ObjetObserve
 {
     private:
+        /// @brief Variable contenant les observeurs de l'objet
         QVector<Observeur*> observeurs;
 
     public:
+        /// @brief Constructeur de l'objet observé
         ObjetObserve();
+
+        /// @brief Destructeur de l'objet observé
+        /// virtuel pour rendre la classe abstraite
         virtual ~ObjetObserve() = 0;
-        void addObserveur(Observeur *observeur);
+
+        /// @brief Méthode qui permet d'ajouter un observeur
+        ///
+        /// @param observeur Référence d'un observeur
+        void addObserveur(Observeur &observeur);
     protected:
+
+        /// @brief Méthode qui permet de notifier tout les observeurs
         void notifier();
 };
 
