@@ -6,6 +6,7 @@ TechnicienWidget::TechnicienWidget(QWidget *parent) :
     ui(new Ui::TechnicienWidget)
 {
     ui->setupUi(this);
+    parent->layout()->addWidget(this);
 }
 
 TechnicienWidget::~TechnicienWidget()

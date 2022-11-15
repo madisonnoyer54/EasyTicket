@@ -6,6 +6,7 @@ ClientWidget::ClientWidget(QWidget *parent) :
     ui(new Ui::ClientWidget)
 {
     ui->setupUi(this);
+    parent->layout()->addWidget(this);
     model = new QStringListModel(this);
     ui->listTicket->setModel(model);
 }
