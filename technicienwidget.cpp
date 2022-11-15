@@ -23,13 +23,8 @@ void TechnicienWidget::setTechnicien(Technicien *technicien) {
     this->technicien = technicien;
 
     // Ajout des catégories pour pouvoir test
-
-    technicien->addCategorie(Categorie::assistance);
-    technicien->addCategorie(Categorie::materiel);
-    technicien->addCategorie(Categorie::securite);
-    technicien->addCategorie(Categorie::logiciel);
-    gestionnaire->assignerTicket(technicien);
     parentWidget()->setWindowTitle("EasyTicket - Technicien : " + technicien->getId());
+    reagir();
 }
 
 void TechnicienWidget::on_fermerTicket_clicked()
@@ -40,7 +35,18 @@ void TechnicienWidget::on_fermerTicket_clicked()
 
 void TechnicienWidget::on_changeCategorie_clicked()
 {
+    Ticket &ticket = *technicien->getTicket();
+    Categorie c = Categorie::assistance;
 
+    if(ui->Logiciel->isChecked()) c = Categorie::logiciel;
+    if(ui->Materiel->isChecked()) c = Categorie::materiel;
+    if(ui->Securite->isChecked()) c = Categorie::securite;
+
+    ticket.setCategorie(c);
+    ticket.setTechnicien(nullptr);
+    technicien->setTicket(nullptr);
+    gestionnaire->assignerTicket(&ticket);
+    gestionnaire->assignerTicket(technicien);
 }
 
 void TechnicienWidget::reagir() {

@@ -44,7 +44,9 @@ class TechnicienWidget : public QWidget, Observeur
         /// Change la catégorie du ticket que traite actuellement le
         /// technicien
         void on_changeCategorie_clicked();
-
+        /// @brief Listener du bouton envoyer
+        /// Envoie un message relié au ticket traité par
+        /// le technicien
         void on_envoyer_clicked();
 
 public:

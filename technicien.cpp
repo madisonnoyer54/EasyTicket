@@ -14,9 +14,9 @@ Ticket* Technicien::getTicket() const {
     return ticket;
 }
 
-void Technicien::setTicket(Ticket& ticket) {
-    this->ticket = &ticket;
-    ticket.setTechnicien(this);
+void Technicien::setTicket(Ticket* ticket) {
+    this->ticket = ticket;
+    if(ticket != nullptr) ticket->setTechnicien(this);
 }
 
 const QVector<Categorie> Technicien::getCategories() const {

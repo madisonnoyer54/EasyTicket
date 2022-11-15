@@ -57,7 +57,7 @@ class Technicien : public Utilisateur
         /// @brief La méthode qui permet d'assigner un ticket à un technicien
         ///
         /// @param ticket Le ticket que va traiter le technicien
-        void setTicket(Ticket& ticket);
+        void setTicket(Ticket* ticket);
 
         /// @brief La méthode qui permet de connaitre les catégories gérées par
         /// le technicien

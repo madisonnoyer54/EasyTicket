@@ -68,7 +68,7 @@ void GestionnaireDialogue::assignerTicket(Ticket* ticket) {
         if(!kv.second->estUnClient() && ticket->getTechnicien() == nullptr) {
             Technicien* technicien = (Technicien*) kv.second;
             if(technicien->peutTraiter(*ticket)) {
-                technicien->setTicket(*ticket);
+                technicien->setTicket(ticket);
             }
         }
     }
@@ -82,14 +82,16 @@ void GestionnaireDialogue::assignerTicket(Ticket* ticket) {
 }
 
 void GestionnaireDialogue::assignerTicket(Technicien* technicien) {
+    Ticket *ticketDonne = nullptr;
     for(int i = 0; i < fileTicket.count(); i++) {
         Ticket* ticket = fileTicket[i];
         if(technicien->peutTraiter(*ticket) && ticket->estOuvert()) {
-            technicien->setTicket(*ticket);
+            technicien->setTicket(ticket);
+            ticketDonne = ticket;
         }
     }
-    if(technicien->getTicket() != nullptr)
-        fileTicket.erase(std::remove(fileTicket.begin(), fileTicket.end(), technicien->getTicket()));
+    if(ticketDonne != nullptr)
+        fileTicket.erase(std::remove(fileTicket.begin(), fileTicket.end(), ticketDonne));
     notifier();
 }
 
