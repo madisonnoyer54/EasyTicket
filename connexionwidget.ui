@@ -2,9 +2,6 @@
 <ui version="4.0">
  <class>ConnexionWidget</class>
  <widget class="QWidget" name="ConnexionWidget">
-  <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,9 +12,6 @@
   </property>
   <property name="windowTitle">
    <string>Form</string>
-  </property>
-  <property name="layoutDirection">
-   <enum>Qt::LeftToRight</enum>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="sizeConstraint">
@@ -54,15 +48,15 @@
      <item>
       <widget class="QTextEdit" name="identifiantText">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="maximumSize">
         <size>
-         <width>300</width>
-         <height>25</height>
+         <width>16777215</width>
+         <height>30</height>
         </size>
        </property>
        <property name="acceptDrops">
@@ -70,9 +64,6 @@
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="sizeAdjustPolicy">
-        <enum>QAbstractScrollArea::AdjustToContents</enum>
        </property>
        <property name="lineWrapMode">
         <enum>QTextEdit::NoWrap</enum>
@@ -92,6 +83,12 @@
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
           <string>Administrateur</string>
          </property>
@@ -99,6 +96,12 @@
        </item>
        <item>
         <widget class="QRadioButton" name="Client">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
           <string>Client</string>
          </property>
@@ -109,12 +112,31 @@
        </item>
        <item>
         <widget class="QRadioButton" name="Technicien">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
           <string>Technicien</string>
          </property>
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
       <widget class="QPushButton" name="connexion">
@@ -154,11 +176,11 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>Administrateur</tabstop>
   <tabstop>Client</tabstop>
   <tabstop>Technicien</tabstop>
   <tabstop>identifiantText</tabstop>
   <tabstop>connexion</tabstop>
+  <tabstop>Administrateur</tabstop>
  </tabstops>
  <resources/>
  <connections/>
