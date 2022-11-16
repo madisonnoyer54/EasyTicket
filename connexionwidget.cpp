@@ -22,9 +22,9 @@ void ConnexionWidget::on_connexion_clicked()
         if(ui->Client->isChecked()) {
             ui->progressBar->setValue(30);
             clientWidget = new ClientWidget(parentWidget());
-            clientWidget->setGestionnaire(gestionnaire);
             ui->progressBar->setValue(60);
             clientWidget->setClient(gestionnaire->getClient(ui->identifiantText->toPlainText()));
+            clientWidget->setGestionnaire(gestionnaire);
             ui->progressBar->setValue(100);
             hide();
             parentWidget()->layout()->addWidget(clientWidget);
@@ -32,9 +32,9 @@ void ConnexionWidget::on_connexion_clicked()
         if(ui->Technicien->isChecked()) {
             ui->progressBar->setValue(30);
             technitienWidget = new TechnicienWidget(parentWidget());
-            technitienWidget->setGestionnaire(gestionnaire);
             ui->progressBar->setValue(60);
             technitienWidget->setTechnicien(gestionnaire->getTechnicien(ui->identifiantText->toPlainText()));
+            technitienWidget->setGestionnaire(gestionnaire);
             ui->progressBar->setValue(100);
             hide();
             parentWidget()->layout()->addWidget(technitienWidget);
