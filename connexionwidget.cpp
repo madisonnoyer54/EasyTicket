@@ -18,31 +18,39 @@ ConnexionWidget::~ConnexionWidget()
 void ConnexionWidget::on_connexion_clicked()
 {
     ui->progressBar->setVisible(true);
-    try{
-        if(ui->Client->isChecked()) {
-            ui->progressBar->setValue(30);
-            clientWidget = new ClientWidget(parentWidget());
-            ui->progressBar->setValue(60);
-            clientWidget->setClient(gestionnaire->getClient(ui->identifiantText->toPlainText()));
+    if(ui->Client->isChecked()) {
+        ui->progressBar->setValue(30);
+        clientWidget = new ClientWidget(parentWidget());
+        ui->progressBar->setValue(60);
+        Client *client = gestionnaire->getClient(ui->identifiantText->toPlainText());
+        if(client == nullptr) {
+            ui->progressBar->setVisible(false);
+            ui->errorLabel->setVisible(true);
+            ui->errorLabel->setText("Impossible d'identifier le client : " + ui->identifiantText->toPlainText());
+        } else {
+            clientWidget->setClient(client);
             clientWidget->setGestionnaire(gestionnaire);
             ui->progressBar->setValue(100);
             hide();
             parentWidget()->layout()->addWidget(clientWidget);
         }
-        if(ui->Technicien->isChecked()) {
-            ui->progressBar->setValue(30);
-            technitienWidget = new TechnicienWidget(parentWidget());
-            ui->progressBar->setValue(60);
-            technitienWidget->setTechnicien(gestionnaire->getTechnicien(ui->identifiantText->toPlainText()));
+    }
+    if(ui->Technicien->isChecked()) {
+        ui->progressBar->setValue(30);
+        technitienWidget = new TechnicienWidget(parentWidget());
+        ui->progressBar->setValue(60);
+        Technicien *technicien = gestionnaire->getTechnicien(ui->identifiantText->toPlainText());
+        if(technicien == nullptr) {
+            ui->progressBar->setVisible(false);
+            ui->errorLabel->setVisible(true);
+            ui->errorLabel->setText("Impossible d'identifier le technicien : " + ui->identifiantText->toPlainText());
+        } else {
+            technitienWidget->setTechnicien(technicien);
             technitienWidget->setGestionnaire(gestionnaire);
             ui->progressBar->setValue(100);
             hide();
             parentWidget()->layout()->addWidget(technitienWidget);
         }
-    } catch (UtilisateurNonTrouveException unte) {
-        ui->errorLabel->setVisible(true);
-        ui->progressBar->setVisible(false);
-        ui->errorLabel->setText(unte.getMessage());
     }
 }
 

@@ -14,10 +14,8 @@ Client* GestionnaireDialogue::getClient(QString identifiant){
     // La map possède t'elle une valeur pour l'identifiant ?
 
     if(listUtilisateurs.count(identifiant)) {
-
         if(listUtilisateurs[identifiant]->estUnClient()) return (Client*) listUtilisateurs[identifiant];
-        throw UtilisateurNonTrouveException("le client : " + identifiant);
-
+        else return nullptr;
     }
 
     if(identifiant.startsWith("TEST")) {
@@ -28,17 +26,16 @@ Client* GestionnaireDialogue::getClient(QString identifiant){
         listUtilisateurs[identifiant] = res;
         return res;
     }
-    throw UtilisateurNonTrouveException("le client : " + identifiant);
+
+    return nullptr;
 }
 
 Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
     // La map possède t'elle une valeur pour l'identifiant ?
 
     if(listUtilisateurs.count(identifiant)) {
-
         if(!listUtilisateurs[identifiant]->estUnClient()) return (Technicien*) listUtilisateurs[identifiant];
-        else throw UtilisateurNonTrouveException("le technicien : " + identifiant);
-
+        else return nullptr;
     }
 
     if(identifiant.startsWith("TEST")) {
@@ -50,7 +47,8 @@ Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
 
         return res;
     }
-    throw UtilisateurNonTrouveException("le technicien : " + identifiant);
+
+    return nullptr;
 }
 
 const QMap<QString, Utilisateur*>& GestionnaireDialogue::getUtilisateurs() const {

@@ -31,7 +31,6 @@ SOURCES += \
     utilisateur.cpp
 
 HEADERS += \
-    UtilisateurNonTrouveException.h \
     clientwidget.h \
     connexionwidget.h \
     dialognouveauticket.h \
