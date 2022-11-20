@@ -43,7 +43,16 @@ class Client : public Utilisateur
         /// @param informations Les informations du ticket
         ///
         /// @param categorie La categorie du ticket
+        ///
+        /// @return Le nouveau ticket
         Ticket& nouveauTicket(QString informations, Categorie categorie);
+
+        /// @brief La méthode qui permet de connaitre le ticket à la position pos dans le vecteur
+        ///
+        /// @param pos Position du ticket dans le vecteur
+        ///
+        /// @return Le ticket à la position pose
+        Ticket& getTicket(int pos) const;
 
         /// @brief La méthode qui permet de connaitre la liste des tickets que possède l'utilisateur
         ///

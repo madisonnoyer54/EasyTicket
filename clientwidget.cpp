@@ -45,3 +45,11 @@ void ClientWidget::reagir() {
     ui->listTicket->setModel(model);
 
 }
+
+void ClientWidget::on_listTicket_clicked(const QModelIndex &index)
+{
+    DialogTicket *dialog = new DialogTicket(*gestionnaire, *client, client->getTicket(index.row()), this);
+
+    dialog->show();
+}
+

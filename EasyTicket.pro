@@ -19,6 +19,7 @@ SOURCES += \
     clientwidget.cpp \
     connexionwidget.cpp \
     dialognouveauticket.cpp \
+    dialogticket.cpp \
     main.cpp \
     mainwindow.cpp \
     objetobserve.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     clientwidget.h \
     connexionwidget.h \
     dialognouveauticket.h \
+    dialogticket.h \
     mainwindow.h \
     objetobserve.h \
     observeur.h \
@@ -49,6 +51,7 @@ FORMS += \
     clientwidget.ui \
     connexionwidget.ui \
     dialognouveauticket.ui \
+    dialogticket.ui \
     mainwindow.ui \
     technicienwidget.ui
 

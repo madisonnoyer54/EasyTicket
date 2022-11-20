@@ -19,6 +19,9 @@ Ticket& Client::nouveauTicket(QString informations, Categorie categorie){
     return *ticket;
 }
 
+Ticket& Client::getTicket(int pos) const {
+    return *listTickets.at(pos);
+}
 
 const QVector<Ticket*>& Client::getTickets() const {
     return listTickets;

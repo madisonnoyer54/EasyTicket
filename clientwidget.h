@@ -11,6 +11,7 @@
 #include "observeur.h"
 // Model de la listView
 #include <QStringListModel>
+#include <dialogticket.h>
 
 namespace Ui {
 class ClientWidget;
@@ -47,7 +48,12 @@ class ClientWidget : public QWidget, Observeur
         /// un nouveau ticket
         void on_ajouterUnTicket_clicked();
 
-    public:
+        /// @brief Listener des éléments de la liste de ticket
+        /// Ouvre un dialog qui permet au client d'envoyer un message
+        /// a propos d'un ticket
+        void on_listTicket_clicked(const QModelIndex &index);
+
+public:
         /// @brief Constructeur de ClientWidget
         ///
         /// @param parent Parent du widget
