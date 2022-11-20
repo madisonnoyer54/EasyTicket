@@ -2,10 +2,12 @@
 
 Client::Client(QString identifiant) : Utilisateur(identifiant)
 {
+    listTickets = new QVector<Ticket *>();
 }
 
 Client::~Client()
 {
+    qDeleteAll(*listTickets);
 }
 
 Ticket& Client::nouveauTicket(QString informations, Categorie categorie){
@@ -14,17 +16,17 @@ Ticket& Client::nouveauTicket(QString informations, Categorie categorie){
     // Id du ticket qui sera l'identifiant de l'utilisateur suivis d'un numéro
 
     ticket->setIdTicket(idUtilisateur + QString::number(prochainIdTicket++));
-    listTickets.push_back(ticket);
+    listTickets->push_back(ticket);
 
     return *ticket;
 }
 
 Ticket& Client::getTicket(int pos) const {
-    return *listTickets.at(pos);
+    return *listTickets->at(pos);
 }
 
 const QVector<Ticket*>& Client::getTickets() const {
-    return listTickets;
+    return *listTickets;
 }
 
 bool Client::estUnClient() {

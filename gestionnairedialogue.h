@@ -21,7 +21,7 @@ class GestionnaireDialogue : public ObjetObserve
 {
     private:
        /// @brief Variable qui contient la hashmap des utilisateurs par rapport à leur identifiant
-       QMap<QString, Utilisateur*> listUtilisateurs;
+       QMap<QString, Utilisateur*> &listUtilisateurs;
        /// @brief Variable qui contient la file d'attente des tickets non traité
        QVector<Ticket*> fileTicket;
 

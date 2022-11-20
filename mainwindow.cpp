@@ -23,3 +23,12 @@ void MainWindow::setGestionnaire(GestionnaireDialogue *gestionnaire) {
     connexion->setGestionnaire(gestionnaire);
 }
 
+
+void MainWindow::on_MainWindow_destroyed() {
+
+}
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    delete gestionnaire;
+}
+

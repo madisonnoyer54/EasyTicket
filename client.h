@@ -9,6 +9,8 @@
 #include "ticket.h"
 /// Permet de gérer une liste de ticket
 #include <QVector>
+/// Permet de delete tout le ticket
+#include <QtAlgorithms>
 /// Permet de gérer l'affichage sur la sortie standard
 #include <iostream>
 
@@ -23,7 +25,7 @@ class Client : public Utilisateur
 {
     private:
         /// @brief Variable qui contient la liste des tickets du client
-        QVector<Ticket*> listTickets;
+        QVector<Ticket*> *listTickets;
         /// @brief Id du prochain ticket
         int prochainIdTicket = 0;
 

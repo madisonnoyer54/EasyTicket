@@ -1,12 +1,13 @@
 #include "gestionnairedialogue.h"
 
-GestionnaireDialogue::GestionnaireDialogue()
+GestionnaireDialogue::GestionnaireDialogue() :
+    listUtilisateurs(*new QMap<QString, Utilisateur*>())
 {
-
 }
 
 GestionnaireDialogue::~GestionnaireDialogue()
 {
+    qDeleteAll(listUtilisateurs);
 }
 
 Client* GestionnaireDialogue::getClient(QString identifiant){

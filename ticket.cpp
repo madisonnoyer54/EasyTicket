@@ -6,7 +6,6 @@ Ticket::Ticket(QString informations, Categorie categorie) : informations(informa
 }
 
 Ticket::~Ticket(){
-
 }
 
 void Ticket::setIdTicket(QString id) {

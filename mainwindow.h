@@ -42,5 +42,11 @@ class MainWindow : public QMainWindow
         ///
         /// @param gestionnaire Modele du logiciel
         void setGestionnaire(GestionnaireDialogue *gestionnaire);
+
+    private slots:
+            void on_MainWindow_destroyed();
+
+    private:
+            void closeEvent(QCloseEvent *event);
 };
 #endif // MAINWINDOW_H
