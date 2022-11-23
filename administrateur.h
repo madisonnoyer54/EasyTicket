@@ -11,7 +11,7 @@
  ** Elle contientl les methodes pour fermer le ticket ou le
  ** construite (à l'aide du constructeur)
  **
- ** @version 1a
+ ** @version 2c
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
