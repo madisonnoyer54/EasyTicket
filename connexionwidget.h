@@ -49,6 +49,12 @@ class ConnexionWidget : public QWidget
         /// si c'est un technicien
         void on_connexion_clicked();
 
+        /// @brief Listener du de l'entrée texte
+        /// Qui fait qu'appuyer sur Entrée valide
+        /// la sélection et agit comme un appui sur
+        /// le bouton de connexion
+        void on_identifiantText_returnPressed();
+
 public:
         /// @brief Constructeur de ConnexionWidget
         ///

@@ -22,11 +22,11 @@ void ConnexionWidget::on_connexion_clicked()
         ui->progressBar->setValue(30);
         clientWidget = new ClientWidget(parentWidget());
         ui->progressBar->setValue(60);
-        Client *client = gestionnaire->getClient(ui->identifiantText->toPlainText());
+        Client *client = gestionnaire->getClient(ui->identifiantText->text());
         if(client == nullptr) {
             ui->progressBar->setVisible(false);
             ui->errorLabel->setVisible(true);
-            ui->errorLabel->setText("Impossible d'identifier le client : " + ui->identifiantText->toPlainText());
+            ui->errorLabel->setText("Impossible d'identifier le client : " + ui->identifiantText->text());
         } else {
             clientWidget->setClient(client);
             clientWidget->setGestionnaire(gestionnaire);
@@ -39,11 +39,11 @@ void ConnexionWidget::on_connexion_clicked()
         ui->progressBar->setValue(30);
         technitienWidget = new TechnicienWidget(parentWidget());
         ui->progressBar->setValue(60);
-        Technicien *technicien = gestionnaire->getTechnicien(ui->identifiantText->toPlainText());
+        Technicien *technicien = gestionnaire->getTechnicien(ui->identifiantText->text());
         if(technicien == nullptr) {
             ui->progressBar->setVisible(false);
             ui->errorLabel->setVisible(true);
-            ui->errorLabel->setText("Impossible d'identifier le technicien : " + ui->identifiantText->toPlainText());
+            ui->errorLabel->setText("Impossible d'identifier le technicien : " + ui->identifiantText->text());
         } else {
             technitienWidget->setTechnicien(technicien);
             technitienWidget->setGestionnaire(gestionnaire);
@@ -58,3 +58,9 @@ void ConnexionWidget::on_connexion_clicked()
 void ConnexionWidget::setGestionnaire(GestionnaireDialogue *gestionnaire) {
     this->gestionnaire = gestionnaire;
 }
+
+void ConnexionWidget::on_identifiantText_returnPressed()
+{
+    this->ui->connexion->click();
+}
+
