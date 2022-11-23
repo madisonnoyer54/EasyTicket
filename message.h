@@ -29,8 +29,7 @@ class Message
         // Date dateDeCreation;
 
     public:
-        /// @brief Le constructeur qui va appeler
-        /// le constructeur du message
+        /// @brief Le constructeur par défaut
         ///
         /// @param idMessage L'identifiant du message
         /// @param contenu le contenu du message
