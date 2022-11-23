@@ -10,14 +10,17 @@
 #include "technicien.h"
 // Pour que le ticket connaisse une liste de ticket
 #include "message.h"
+// Pour permettre au ticket d'hérite de objectObserve
 #include "objetobserve.h"
 
 class Technicien;
 
 /** @brief La classe Ticket est la classe qui permet de créer un ticket
  **
- ** Elle contientl les methodes pour fermer le ticket ou le
+ ** Elle contient les methodes pour fermer le ticket ou le
  ** construite (à l'aide du constructeur)
+ **
+ ** Cette classe hérite de ObjetObserve
  **
  ** @version 2c
  **
@@ -113,7 +116,7 @@ class Ticket : public ObjetObserve
         /// @brief La méthode qui permet de retourner la liste des messages
         ///
         /// @return Qvector contenant la liste des messages
-        QVector<Message *> &getMessages();
+        const QVector<Message *> &getMessages() const;
 
         /// @brief La méthode qui permet d'ajouter un message
         /// à la liste des messages

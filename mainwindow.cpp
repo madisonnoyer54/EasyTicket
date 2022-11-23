@@ -29,6 +29,7 @@ void MainWindow::on_MainWindow_destroyed() {
 }
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    std::ignore = event;
     delete gestionnaire;
 }
 

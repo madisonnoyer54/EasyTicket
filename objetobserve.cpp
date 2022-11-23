@@ -13,6 +13,7 @@ void ObjetObserve::notifier() {
 
 void ObjetObserve::addObserveur(Observeur &observeur) {
     observeurs.push_back(&observeur);
+    observeur.reagir();
 }
 
 ObjetObserve::~ObjetObserve() {}

@@ -8,7 +8,7 @@
 
 class Utilisateur;
 
-/** @brief La classe Message est la classe qui permet de crée le message de la personne, on peut utilise cette classe pour modifier le message ou autre
+/** @brief La classe Message est la classe qui permet de créer un message envoyé par un utilisateur par rapport a un ticket
  **
  ** @version 2c
  **
@@ -23,8 +23,6 @@ class Message
         QString contenu;
         /// @brief Variable qui contient l'auteur du message
         Utilisateur *auteur;
-        /// @brief Variable qui contient la date de création du message
-        // Date dateDeCreation;
 
     public:
         /// @brief Le constructeur par défaut
@@ -47,9 +45,9 @@ class Message
         /// @return L'identifient du message
         QString getIdMessage() const;
 
-        /// @brief La méthode qui permet de connaitre l'utilisateur du message
+        /// @brief La méthode qui permet de connaitre l'auteur du message
         ///
-        /// @return L'utilisateur du message
+        /// @return L'auteur du message
         Utilisateur *getUtilisateur() const;
 
         /// @brief La méthode qui permet de définir le contenu d'un message
@@ -62,9 +60,9 @@ class Message
         /// @param idMessage Le nouveau identifiant du message
         void setIdMessage(QString idMessage);
 
-        /// @brief La méthode qui permet de définir l'utlisateur d'un message
+        /// @brief La méthode qui permet de définir l'auteur d'un message
         ///
-        /// @param utilisateur Le nouveau utilisateur du message
+        /// @param utilisateur Le nouvel utilisateur du message
         void setUtilisateur(Utilisateur &utilisateur);
 
 

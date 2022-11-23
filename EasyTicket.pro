@@ -26,7 +26,6 @@ SOURCES += \
     message.cpp \
     objetobserve.cpp \
     technicienwidget.cpp \
-    categorie.cpp \
     client.cpp \
     gestionnairedialogue.cpp \
     technicien.cpp \

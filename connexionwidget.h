@@ -21,7 +21,7 @@ class ConnexionWidget;
  *
  * Cette classe hérite de QWidget
  *
- * @version 2b
+ * @version 2c
  *
  * @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  */

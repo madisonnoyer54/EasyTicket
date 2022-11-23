@@ -9,7 +9,7 @@
 /**
  * @brief La classe abstraite d'un objet observer
  *
- * @version 1d
+ * @version 2c
  *
  * @author Diebold Erwan, Noyer Madison, Poincet Julien
  */

@@ -13,7 +13,6 @@ DialogTicket::DialogTicket(GestionnaireDialogue &gestionnaire, Client &client, T
     model = new QStringListModel(this);
     ui->listMessage->setModel(model);
     ticket.addObserveur(*this);
-    reagir();
 }
 
 DialogTicket::~DialogTicket()

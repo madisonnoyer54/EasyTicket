@@ -49,7 +49,7 @@ void Ticket::setTechnicien(Technicien* technicien) {
     this->technicien = technicien;
 }
 
-QVector<Message *> &Ticket::getMessages() {
+const QVector<Message *> &Ticket::getMessages() const {
     return *listMessages;
 }
 

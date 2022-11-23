@@ -63,13 +63,4 @@ class GestionnaireDialogue : public ObjetObserve
         void assignerTicket(Technicien* technicien);
 };
 
-/// @brief Fonction qui permet d'afficher les données du gestionnaire sur la sortie standard
-///
-/// @param os Flux de la sortie standard
-///
-/// @param technicien Constante du gestionnaire
-///
-/// @return Flux de la sortie standard
-std::ostream& operator<<(std::ostream& os, GestionnaireDialogue const& dialog);
-
 #endif // GESTIONNAIREDIALOGUE_H
