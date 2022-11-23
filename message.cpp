@@ -1,10 +1,8 @@
 #include "message.h"
 
 
-Message::Message(QString idMessage,QString contenu)
+Message::Message(Utilisateur &utilisateur, QString idMessage, QString contenu) : idMessage(idMessage), contenu(contenu), auteur(&utilisateur)
 {
- this->idMessage = idMessage;
- this->contenu = contenu;
 }
 
 Message::~Message(){
@@ -21,7 +19,7 @@ QString Message::getIdMessage() const{
 }
 
 Utilisateur* Message::getUtilisateur() const{
-    return utilisateur;
+    return auteur;
 }
 
 void Message::setContenu(QString contenu){
@@ -33,5 +31,5 @@ void Message::setIdMessage(QString idMessage){
 }
 
 void Message::setUtilisateur(Utilisateur &utilisateur){
-    this->utilisateur = &utilisateur;
+    this->auteur = &utilisateur;
 }

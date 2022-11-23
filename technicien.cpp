@@ -59,16 +59,3 @@ bool Technicien::peutTraiter(Ticket& ticket) {
 
     return res;
 }
-
-std::ostream& operator<<(std::ostream& os, Technicien const& technicien) {
-    os << "[Technicien] " << technicien.getId().toUtf8().constData() << " {" << std::endl;
-    os << "\tCategories : ";
-    for(Categorie categorie : technicien.getCategories()) os << categorie << ", ";
-    os << "\n";
-    Ticket* ticket = technicien.getTicket();
-    // On évite d'afficher un objet non défini
-    if(ticket != nullptr) os << "\tDoit gerer : " << *ticket << std::endl;
-    os << "}" << std::endl;
-
-    return os;
-}

@@ -33,6 +33,8 @@ int main(int argc, char *argv[])
     ticket = &client->nouveauTicket("Apres avoir ecrit que j'avais un probleme avec mon disque dur, je ne vois que des pubs pour des disques durs... Il y aurait-il une fuite de donnees ??", Categorie::securite);
     gestionnaire->assignerTicket(ticket);
 
+    ticket->ajouterMessage(*client, "Je trouve ça vraiment étrange...");
+
     client = gestionnaire->getClient("TESTMartin");
     ticket = &client->nouveauTicket("Votre logiciel a crash suite a un click sur le bouton 'ajout'.", Categorie::logiciel);
     gestionnaire->assignerTicket(ticket);

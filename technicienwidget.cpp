@@ -6,6 +6,7 @@ TechnicienWidget::TechnicienWidget(QWidget *parent) :
     ui(new Ui::TechnicienWidget)
 {
     ui->setupUi(this);
+    model = new QStringListModel(this);
 }
 
 TechnicienWidget::~TechnicienWidget()
@@ -49,7 +50,8 @@ void TechnicienWidget::on_changeCategorie_clicked()
 }
 
 void TechnicienWidget::reagir() {
-    if(technicien->getTicket() == nullptr) {
+    Ticket *ticket = technicien->getTicket();
+    if(ticket == nullptr) {
         desactiver();
     } else {
         activer();
@@ -75,6 +77,11 @@ void TechnicienWidget::afficheDonnee() {
                 ui->Securite->setChecked(true);
             break;
     }
+    QStringList list;
+    for(Message *message : ticket->getMessages().toStdVector())  list << "<" + message->getUtilisateur()->getId() + "> " + message->getContenu();
+    model->setStringList(list);
+    ui->textMessage->setText("");
+    ui->messageList->setModel(model);
 }
 
 void TechnicienWidget::desactiver() {
@@ -89,6 +96,8 @@ void TechnicienWidget::desactiver() {
     ui->fermerTicket->setDisabled(true);
     ui->textMessage->setDisabled(true);
     ui->envoyer->setDisabled(true);
+    ui->messageList->setDisabled(true);
+    model->setStringList(*new QStringList());
 }
 
 void TechnicienWidget::activer() {
@@ -100,10 +109,13 @@ void TechnicienWidget::activer() {
     ui->fermerTicket->setEnabled(true);
     ui->textMessage->setEnabled(true);
     ui->envoyer->setEnabled(true);
+    ui->messageList->setEnabled(true);
 }
 
 void TechnicienWidget::on_envoyer_clicked()
 {
+    technicien->getTicket()->ajouterMessage(*technicien, ui->textMessage->toPlainText());
     ui->textMessage->setText("");
+    reagir();
 }
 

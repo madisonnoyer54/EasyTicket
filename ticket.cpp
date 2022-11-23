@@ -2,6 +2,7 @@
 
 Ticket::Ticket(QString informations, Categorie categorie) : informations(informations), categorie(categorie)
 {
+    listMessages = new QVector<Message*>();
     ouvert = true;
 }
 
@@ -48,9 +49,11 @@ void Ticket::setTechnicien(Technicien* technicien) {
     this->technicien = technicien;
 }
 
-std::ostream& operator<<(std::ostream& os, Ticket const& ticket) {
+QVector<Message *> &Ticket::getMessages() {
+    return *listMessages;
+}
 
-    os << "[" << ticket.getIdTicket().toUtf8().constData() << "] <" << ticket.getCategorie() << "> " << ticket.getInformations().toUtf8().constData() << " : " << ((ticket.estOuvert()) ? "Ouvert" : "Fermer");
-
-    return os;
+void Ticket::ajouterMessage(Utilisateur &utilisateur, QString message) {
+    listMessages->append(new Message(utilisateur, "1",message));
+    notifier();
 }

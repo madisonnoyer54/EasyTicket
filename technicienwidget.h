@@ -7,6 +7,8 @@
 #include "gestionnairedialogue.h"
 // Cette classe héritera d'observeur
 #include "observeur.h"
+// Permet de gérer la liste des messages
+#include <QStringListModel>
 
 namespace Ui {
 class TechnicienWidget;
@@ -18,7 +20,7 @@ class TechnicienWidget;
  *
  * Cette classe hérite de QWidget de Observeur
  *
- * @version 2a
+ * @version 2c
  *
  * @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  */
@@ -33,6 +35,8 @@ class TechnicienWidget : public QWidget, Observeur
         GestionnaireDialogue *gestionnaire;
         /// @brief Variable contenant le technicien utilise le logiciel
         Technicien *technicien;
+        /// @brief Model de la liste des messages
+        QStringListModel *model;
 
 
     private slots:

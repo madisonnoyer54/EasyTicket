@@ -6,8 +6,6 @@
 // Permet au message d'avoir son utilisateur
 #include "utilisateur.h"
 
-// Un Technicien connait un utilisateur, il faut donc déclarer
-// cette classe (Mais il est inutile de la définir)
 class Utilisateur;
 
 /** @brief La classe Message est la classe qui permet de crée le message de la personne, on peut utilise cette classe pour modifier le message ou autre
@@ -23,17 +21,18 @@ class Message
         QString idMessage;
         /// @brief Variable qui contient le contenu du message
         QString contenu;
-        /// @brief Variable qui contient l'utilisateur du message
-        Utilisateur *utilisateur;
+        /// @brief Variable qui contient l'auteur du message
+        Utilisateur *auteur;
         /// @brief Variable qui contient la date de création du message
         // Date dateDeCreation;
 
     public:
         /// @brief Le constructeur par défaut
         ///
+        /// @param utilisateur L'utilisateur a l'origine du message
         /// @param idMessage L'identifiant du message
         /// @param contenu le contenu du message
-        Message(QString idMessage,QString contenu);
+        Message(Utilisateur &utilisateur, QString idMessage, QString contenu);
 
         /// @brief le destructeur
         ~Message();

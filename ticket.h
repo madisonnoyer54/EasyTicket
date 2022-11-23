@@ -8,6 +8,9 @@
 // Pour définir la classe technicien
 // qui représente le technicien qui gèrera la classe
 #include "technicien.h"
+// Pour que le ticket connaisse une liste de ticket
+#include "message.h"
+#include "objetobserve.h"
 
 class Technicien;
 
@@ -16,11 +19,11 @@ class Technicien;
  ** Elle contientl les methodes pour fermer le ticket ou le
  ** construite (à l'aide du constructeur)
  **
- ** @version 1b
+ ** @version 2c
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
-class Ticket
+class Ticket : public ObjetObserve
 {
 
     private:
@@ -39,6 +42,9 @@ class Ticket
 
         /// @brief Variable qui désigne le technicien qui s'occupe du ticket
         Technicien* technicien = nullptr;
+
+        /// @brief Variable qui désigne la liste des messages du ticket
+        QVector<Message *> *listMessages;
 
 
     public:
@@ -103,6 +109,19 @@ class Ticket
         ///
         /// @param technicien Le nouveau technicien du ticket
         void setTechnicien(Technicien* technicien);
+
+        /// @brief La méthode qui permet de retourner la liste des messages
+        ///
+        /// @return Qvector contenant la liste des messages
+        QVector<Message *> &getMessages();
+
+        /// @brief La méthode qui permet d'ajouter un message
+        /// à la liste des messages
+        ///
+        /// @param utilisateur L'utilisateur qui envoit le message
+        ///
+        /// @param message Contenu du message
+        void ajouterMessage(Utilisateur &utilisateur, QString message);
 };
 
 #endif // TICKET_H

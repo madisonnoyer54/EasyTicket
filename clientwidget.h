@@ -23,7 +23,7 @@ class ClientWidget;
  *
  * Cette classe hérite de QWidget et d'observeur
  *
- * @version 2b
+ * @version 2c
  *
  * @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  */

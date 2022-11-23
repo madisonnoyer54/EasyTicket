@@ -10,15 +10,27 @@ DialogTicket::DialogTicket(GestionnaireDialogue &gestionnaire, Client &client, T
 {
     ui->setupUi(this);
     setWindowTitle(ticket.getIdTicket());
+    model = new QStringListModel(this);
+    ui->listMessage->setModel(model);
+    ticket.addObserveur(*this);
+    reagir();
 }
 
 DialogTicket::~DialogTicket()
 {
     delete ui;
+    delete model;
 }
 
 void DialogTicket::on_Envoyer_clicked()
 {
+    ticket.ajouterMessage(client, ui->textMessage->toPlainText());
     ui->textMessage->setText("");
 }
 
+void DialogTicket::reagir() {
+    QStringList list;
+    for(Message *message : ticket.getMessages().toStdVector())
+    list << "<" + message->getUtilisateur()->getId() + "> " + message->getContenu();
+    model->setStringList(list);
+}

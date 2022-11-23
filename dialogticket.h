@@ -5,6 +5,8 @@
 #include <QDialog>
 // Permet d'inclure le modèle à l'interface
 #include "gestionnairedialogue.h"
+// Model de la listView
+#include <QStringListModel>
 
 namespace Ui {
 class DialogTicket;
@@ -15,11 +17,11 @@ class DialogTicket;
  * C'est un dialog qui permet au client de voir les informations sur un ticket
  * et communiquer avec le technicien par rapport a ce ticket
  *
- * @version 2b
+ * @version 2c
  *
  * @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  */
-class DialogTicket : public QDialog
+class DialogTicket : public QDialog, Observeur
 {
     Q_OBJECT
 
@@ -32,6 +34,10 @@ class DialogTicket : public QDialog
         Client &client;
         /// @brief Variable contenant le ticket que le client consulte
         Ticket &ticket;
+        /// @brief Model de la liste des messages
+        QStringListModel *model;
+        /// @brief Affiche les messages du ticket
+        void afficherMessages();
 
     public:
         /// @brief Constructeur du dialog
@@ -41,7 +47,13 @@ class DialogTicket : public QDialog
 
         /// @brief Destructeur du dialog
         ~DialogTicket();
-private slots:
+
+        /// @brief Methode reagir qui fait
+        /// reagir un objet lorsqu'elle est appelée
+        void reagir() override;
+
+    private slots:
+        /// @brief Envoit un message sur le ticket
         void on_Envoyer_clicked();
 };
 

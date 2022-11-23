@@ -94,14 +94,3 @@ void GestionnaireDialogue::assignerTicket(Technicien* technicien) {
         fileTicket.erase(std::remove(fileTicket.begin(), fileTicket.end(), ticketDonne));
     notifier();
 }
-
-std::ostream& operator<<(std::ostream& os, GestionnaireDialogue const& dialog) {
-    // kv étant un couple key value, avec pour clé l'identifiant et value l'utilisateur
-    for(const auto& kv : dialog.getUtilisateurs().toStdMap()) {
-        if(kv.second->estUnClient())os << *(Client *const) kv.second;
-        else os << *(Technicien *const) kv.second;
-        os << std::endl;
-    }
-
-    return os;
-}
