@@ -12,7 +12,7 @@ class Utilisateur;
 
 /** @brief La classe Message est la classe qui permet de crée le message de la personne, on peut utilise cette classe pour modifier le message ou autre
  **
- ** @version 1a
+ ** @version 2c
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/

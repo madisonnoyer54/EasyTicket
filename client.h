@@ -17,7 +17,7 @@
 /** @brief La classe Client est la classe qui permet de crée le compte client d'une personne, on lui attribuer un ou plusieur ticket
  ** La class Client hérite de la classe Utilisateur
  **
- ** @version 1a
+ ** @version 2a
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
@@ -66,14 +66,5 @@ class Client : public Utilisateur
         /// @return true
         bool estUnClient() override;
 };
-
-/// @brief Fonction qui permet d'afficher un client sur la sortie standard
-///
-/// @param os Flux de la sortie standard
-///
-/// @param client Constante du client
-///
-/// @return Flux de la sortie standard
-std::ostream& operator<<(std::ostream& os, Client const& client);
 
 #endif // CLIENT_H

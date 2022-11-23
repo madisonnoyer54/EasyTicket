@@ -8,7 +8,7 @@
 // Pour la liste de categorie
 #include <QVector>
 // Pour la suppression d'element dans la liste de categorie
-#include <algorithm>
+#include <QtAlgorithms>
 
 // Un Technicien connait un ticket, il faut donc déclarer
 // cette classe (Mais il est inutile de la définir)
@@ -19,7 +19,7 @@ class Ticket;
  ** Le tecnicien connait un Ticket et une ou plusieur catégorie(s) de ticket
  ** La classe Technicien hérite de la class Utilisateur
  **
- ** @version 1a
+ ** @version 2b
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
@@ -90,14 +90,5 @@ class Technicien : public Utilisateur
         /// et que le ticket correspond à ses catégories
         bool peutTraiter(Ticket& ticket);
 };
-
-/// @brief Fonction qui permet d'afficher un technicien sur la sortie standard
-///
-/// @param os Flux de la sortie standard
-///
-/// @param technicien Constante du technicien
-///
-/// @return Flux de la sortie standard
-std::ostream& operator<<(std::ostream& os, Technicien const& technicien);
 
 #endif // TECHNICIEN_H

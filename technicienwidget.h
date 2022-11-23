@@ -18,7 +18,7 @@ class TechnicienWidget;
  *
  * Cette classe hérite de QWidget de Observeur
  *
- * @version 1c
+ * @version 2a
  *
  * @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  */

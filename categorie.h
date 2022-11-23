@@ -13,14 +13,4 @@
  **/
 enum Categorie {logiciel, materiel, assistance, securite};
 
-
-/// @brief Fonction qui permet d'afficher une categorie sur la sortie standard
-///
-/// @param os Flux de la sortie standard
-///
-/// @param ticket Constante de la categorie
-///
-/// @return Flux de la sortie standard
-std::ostream& operator<<(std::ostream& os, Categorie const& categorie);
-
 #endif // CATEGORIE_H

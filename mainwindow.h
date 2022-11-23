@@ -16,7 +16,7 @@ QT_END_NAMESPACE
  * @brief La classe MainWindow correspond a la classe
  * principale de l'interface graphique du logiciel
  *
- * @version 1c
+ * @version 2b
  *
  * @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  */

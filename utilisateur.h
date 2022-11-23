@@ -8,7 +8,7 @@
  *
  *  Elle contient deux méthodes abstraites ("le destructeur" et estUnClient)
  *
- ** @version 1a
+ ** @version 1b
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/

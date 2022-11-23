@@ -3,7 +3,10 @@
 
 // Pour la gestion de l'identifiant
 #include <QString>
+// Pour gérer la categorie du ticket
 #include "categorie.h"
+// Pour définir la classe technicien
+// qui représente le technicien qui gèrera la classe
 #include "technicien.h"
 
 class Technicien;
@@ -13,7 +16,7 @@ class Technicien;
  ** Elle contientl les methodes pour fermer le ticket ou le
  ** construite (à l'aide du constructeur)
  **
- ** @version 1a
+ ** @version 1b
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
@@ -100,15 +103,6 @@ class Ticket
         ///
         /// @param technicien Le nouveau technicien du ticket
         void setTechnicien(Technicien* technicien);
-    };
-
-/// @brief Fonction qui permet d'afficher un ticket sur la sortie standard
-///
-/// @param os Flux de la sortie standard
-///
-/// @param ticket Constante du ticket
-///
-/// @return Flux de la sortie standard
-std::ostream& operator<<(std::ostream& os, Ticket const& ticket);
+};
 
 #endif // TICKET_H
