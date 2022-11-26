@@ -4,6 +4,7 @@ Ticket::Ticket(QString informations, Categorie categorie) : informations(informa
 {
     listMessages = new QVector<Message*>();
     ouvert = true;
+    dateCreation = QDate::currentDate();
 }
 
 Ticket::~Ticket(){
@@ -47,6 +48,14 @@ Technicien* Ticket::getTechnicien() const {
 
 void Ticket::setTechnicien(Technicien* technicien) {
     this->technicien = technicien;
+}
+
+const QDate &Ticket::getDateCreation() const {
+    return dateCreation;
+}
+
+void Ticket::setDateCreation(QDate date) {
+    dateCreation = date;
 }
 
 const QVector<Message *> &Ticket::getMessages() const {

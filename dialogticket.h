@@ -17,7 +17,7 @@ class DialogTicket;
  * C'est un dialog qui permet au client de voir les informations sur un ticket
  * et communiquer avec le technicien par rapport a ce ticket
  *
- * @version 2c
+ * @version 3a
  *
  * @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  */

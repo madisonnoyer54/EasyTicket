@@ -12,6 +12,8 @@
 #include "message.h"
 // Pour permettre au ticket d'hérite de objectObserve
 #include "objetobserve.h"
+// Pour permettre au ticket d'avoir une date de création
+#include <QDate>
 
 class Technicien;
 
@@ -22,7 +24,7 @@ class Technicien;
  **
  ** Cette classe hérite de ObjetObserve
  **
- ** @version 2c
+ ** @version 3a
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
@@ -48,6 +50,9 @@ class Ticket : public ObjetObserve
 
         /// @brief Variable qui désigne la liste des messages du ticket
         QVector<Message *> *listMessages;
+
+        /// @brief Variable qui contient la date de création du ticket
+        QDate dateCreation;
 
 
     public:
@@ -104,7 +109,7 @@ class Ticket : public ObjetObserve
         /// @brief La méthode qui permet de connaitre le
         /// technicien qui gère le ticket
         ///
-        /// @return Le tehcnicien qui gère le ticket
+        /// @return Le technicien qui gère le ticket
         Technicien* getTechnicien() const;
 
         /// @brief La méthode qui permet de définir le technicien
@@ -112,6 +117,19 @@ class Ticket : public ObjetObserve
         ///
         /// @param technicien Le nouveau technicien du ticket
         void setTechnicien(Technicien* technicien);
+
+        /// @brief La méthode qui permet de connaitre le
+        /// moment de création d'un ticket
+        ///
+        /// @return Le temps correspondant au moment
+        /// de création du ticket
+        const QDate &getDateCreation() const;
+
+        /// @brief La méthode qui permet de définir une date
+        /// de création au ticket
+        ///
+        /// @param date La date de création
+        void setDateCreation(QDate date);
 
         /// @brief La méthode qui permet de retourner la liste des messages
         ///

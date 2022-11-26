@@ -23,7 +23,7 @@ class ClientWidget;
  *
  * Cette classe hérite de QWidget et d'observeur
  *
- * @version 2c
+ * @version 3a
  *
  * @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  */
@@ -52,6 +52,16 @@ class ClientWidget : public QWidget, Observeur
         /// Ouvre un dialog qui permet au client d'envoyer un message
         /// a propos d'un ticket
         void on_listTicket_clicked(const QModelIndex &index);
+
+        /// @brief Listener du selecteur de date
+        /// Fait réagir l'interface pour afficher
+        /// les choix de ticket possible
+        void on_dateSup_userDateChanged(const QDate &date);
+
+        /// @brief Listener du selecteur de date
+        /// Fait réagir l'interface pour afficher
+        /// les choix de ticket possible
+        void on_dateInf_userDateChanged(const QDate &date);
 
 public:
         /// @brief Constructeur de ClientWidget
