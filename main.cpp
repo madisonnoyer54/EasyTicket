@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     // Avec des clients qui ont créé des tickets
     // Et nous les affichons sur la sortie standard
     GestionnaireDialogue* gestionnaire = new GestionnaireDialogue();
-
+    /*
     Client* client = gestionnaire->getClient("TESTJosephine");
     Ticket* ticket = &client->nouveauTicket("Mon disque dur prend feu apres avoir utilise votre logiciel. Je ne comprend pas....", Categorie::materiel);
     gestionnaire->assignerTicket(ticket);
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
     technicien->addCategorie(Categorie::securite);
     technicien->addCategorie(Categorie::materiel);
     technicien->addCategorie(Categorie::logiciel);
-    gestionnaire->assignerTicket(technicien);
+    gestionnaire->assignerTicket(technicien);*/
 
     w.setGestionnaire(gestionnaire);
 

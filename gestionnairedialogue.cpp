@@ -1,8 +1,10 @@
 #include "gestionnairedialogue.h"
+#include <QSqlDatabase>
 
 GestionnaireDialogue::GestionnaireDialogue() :
     listUtilisateurs(*new QMap<QString, Utilisateur*>())
 {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 }
 
 GestionnaireDialogue::~GestionnaireDialogue()
