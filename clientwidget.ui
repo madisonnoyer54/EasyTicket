@@ -26,7 +26,15 @@
         </widget>
        </item>
        <item>
-        <widget class="QDateEdit" name="dateSup"/>
+        <widget class="QDateEdit" name="dateSup">
+         <property name="date">
+          <date>
+           <year>2022</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="label_2">
@@ -36,7 +44,25 @@
         </widget>
        </item>
        <item>
-        <widget class="QDateEdit" name="dateInf"/>
+        <widget class="QDateEdit" name="dateInf">
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="date">
+          <date>
+           <year>2023</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="horizontalSpacer">

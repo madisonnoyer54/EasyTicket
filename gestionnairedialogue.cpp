@@ -7,6 +7,8 @@ GestionnaireDialogue::GestionnaireDialogue() :
     if(!QFile::exists(targetDb)){
         QFile::copy(":/ressources/EasyTicket.db", targetDb);
     }
+    QFile::setPermissions(targetDb, QFileDevice::WriteUser);
+    QFile::setPermissions(targetDb, QFileDevice::ReadUser);
 
     db.setDatabaseName(targetDb);
     db.open();
@@ -52,6 +54,26 @@ Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
     if (query.next()) {
         technicien = new Technicien(query.value(0).toString());
         listUtilisateurs[identifiant] = technicien;
+
+        if(!query.value("idTicket").isNull()) {
+            QSqlQuery ticketQuery;
+
+            ticketQuery.exec("SELECT * FROM Ticket WHERE UPPER(idTicket) = UPPER('" + query.value("idTicket").toString() + "')");
+            if(ticketQuery.next()) {
+                Categorie c = Categorie::assistance;
+                QString categorie = ticketQuery.value("nomCategorie").toString();
+                if(categorie == "Logiciel") c = Categorie::logiciel;
+                if(categorie == "Materiel") c = Categorie::materiel;
+                if(categorie == "Securite") c = Categorie::securite;
+
+                Ticket *ticket = new Ticket(ticketQuery.value("informations").toString(), c);
+                ticket->setIdTicket(ticketQuery.value("idTicket").toString());
+                if(ticketQuery.value("ouvert").toInt() != 1) ticket->fermer();
+                ticket->setDateCreation(ticketQuery.value("dateCreation").toDate());
+
+                technicien->setTicket(ticket);
+            }
+            }
     }
 
     return technicien;
@@ -60,6 +82,8 @@ Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
 const QMap<QString, Utilisateur*>& GestionnaireDialogue::getUtilisateurs() const {
     return listUtilisateurs;
 }
+
+#include <QSqlError>
 
 void GestionnaireDialogue::chargerTickets(Client &client) {
     QSqlQuery query;
@@ -79,7 +103,7 @@ void GestionnaireDialogue::chargerTickets(Client &client) {
         ticket->setDateCreation(query.value("dateCreation").toDate());
 
         QSqlQuery technicienQuery;
-        technicienQuery.exec("SELECT * FROM Techinicien WHERE UPPER(idTicket) = UPPER('" + ticket->getIdTicket() + "')");
+        technicienQuery.exec("SELECT * FROM Technicien WHERE UPPER(idTicket) = UPPER('" + ticket->getIdTicket() + "')");
         if(technicienQuery.next()) {
             QString idTechnicien = technicienQuery.value("idUtilisateur").toString();
             Technicien *technicien;
@@ -90,32 +114,52 @@ void GestionnaireDialogue::chargerTickets(Client &client) {
                 listUtilisateurs[idTechnicien] = technicien;
             }
             technicien->setTicket(ticket);
+        } else {
+            assignerTicket(ticket);
         }
     }
 }
 
 void GestionnaireDialogue::assignerTicket(Ticket* ticket) {
 
-    // On regarde l'ensemble des utilisateurs actuels
-    for(const auto& kv : listUtilisateurs.toStdMap()) {
+    QSqlQuery query;
 
-        // Si l'utilisateur est un technicien
-        // et qu'il peut traiter le ticket
-        // On lui assigne le ticket
-        // Sinon on passe à l'utilisateur suivant
-        if(!kv.second->estUnClient() && ticket->getTechnicien() == nullptr) {
-            Technicien* technicien = (Technicien*) kv.second;
-            if(technicien->peutTraiter(*ticket)) {
-                technicien->setTicket(ticket);
-            }
+    QString categorie = "Logiciel";
+    switch (ticket->getCategorie()) {
+        case Categorie::assistance:
+            categorie = "Assistance";
+            break;
+        case Categorie::logiciel:
+            break;
+        case Categorie::materiel:
+            categorie = "Materiel";
+            break;
+        case Categorie::securite:
+            categorie = "Securite";
+            break;
+    }
+
+    query.exec("SELECT T.idUtilisateur FROM Technicien T, Peut_gerer P WHERE T.idUtilisateur = P.idTechnicien AND T.idTicket IS NULL AND UPPER(P.nomCategorie) = UPPER('Securite')");
+
+    if(query.next()) {
+        QString idTechnicien = query.value("idUtilisateur").toString();
+        Technicien *technicien;
+        if(listUtilisateurs.count(idTechnicien) != 0) {
+                    technicien = (Technicien *) listUtilisateurs[idTechnicien];
+        } else {
+            technicien = new Technicien(idTechnicien);
+            listUtilisateurs[idTechnicien] = technicien;
         }
+        technicien->setTicket(ticket);
+        query.finish();
+
+        QSqlQuery queryTechnicien;
+        qDebug() << "UPDATE Technicien SET idTicket = '" + ticket->getIdTicket() + "' WHERE UPPER(idUtilisateur) = UPPER('" + idTechnicien +"')";
+        qDebug() << queryTechnicien.prepare("UPDATE Technicien SET idTicket = '" + ticket->getIdTicket() + "' WHERE UPPER(idUtilisateur) = UPPER('" + idTechnicien +"')");
+        queryTechnicien.exec();
+        qDebug() << queryTechnicien.lastError();
     }
 
-    // Si le ticket n'a pas trouvé de technicien apte à
-    // le traiter, on l'ajoute dans une file d'attente
-    if(ticket->getTechnicien() == nullptr) {
-        fileTicket.push_back(ticket);
-    }
     notifier();
 }
 
