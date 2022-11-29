@@ -56,6 +56,8 @@ class Client : public Utilisateur
         /// @return Le ticket à la position pose
         Ticket& getTicket(int pos) const;
 
+        void ajouterTicket(Ticket &ticket);
+
         /// @brief La méthode qui permet de connaitre la liste des tickets que possède l'utilisateur
         ///
         /// @return Un vecteur contenant la liste des tickets d'un utilisateur

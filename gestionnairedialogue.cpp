@@ -1,16 +1,8 @@
 #include "gestionnairedialogue.h"
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QVariant>
-#include <QDebug>
-#include <QFile>
-#include <QDir>
 
 GestionnaireDialogue::GestionnaireDialogue() :
     listUtilisateurs(*new QMap<QString, Utilisateur*>())
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-
     QString targetDb = QDir::currentPath().append("/EasyTicket.db");
     if(!QFile::exists(targetDb)){
         QFile::copy(":/ressources/EasyTicket.db", targetDb);
@@ -18,42 +10,32 @@ GestionnaireDialogue::GestionnaireDialogue() :
 
     db.setDatabaseName(targetDb);
     db.open();
-
-    QSqlQuery query;
-
-    query.exec("SELECT Client.* FROM Client");
-    while (query.next()) {
-            QString name = query.value(0).toString();
-            qDebug() << name;
-        }
-
-    db.close();
 }
 
 GestionnaireDialogue::~GestionnaireDialogue()
 {
     qDeleteAll(listUtilisateurs);
+    db.close();
 }
 
 Client* GestionnaireDialogue::getClient(QString identifiant){
 
     // La map possède t'elle une valeur pour l'identifiant ?
-
     if(listUtilisateurs.count(identifiant)) {
         if(listUtilisateurs[identifiant]->estUnClient()) return (Client*) listUtilisateurs[identifiant];
         else return nullptr;
     }
 
-    if(identifiant.startsWith("TEST")) {
-        // Aucun utilisateur possède cet identifiant, afin de tester
-        // Un nouveau client va être créé
-        Client* res = new Client(identifiant);
-
-        listUtilisateurs[identifiant] = res;
-        return res;
+    Client *client = nullptr;
+    QSqlQuery query;
+    query.exec("SELECT * FROM Client WHERE UPPER(idUtilisateur) = UPPER('" + identifiant + "')");
+    if (query.next()) {
+        client = new Client(query.value(0).toString());
+        listUtilisateurs[identifiant] = client;
+        chargerTickets(*client);
     }
 
-    return nullptr;
+    return client;
 }
 
 Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
@@ -64,21 +46,52 @@ Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
         else return nullptr;
     }
 
-    if(identifiant.startsWith("TEST")) {
-        // Aucun utilisateur possède cet identifiant, afin de tester
-        // Un nouveau client va être créé
-        Technicien* res = new Technicien(identifiant);
-
-        listUtilisateurs[identifiant] = res;
-
-        return res;
+    Technicien *technicien = nullptr;
+    QSqlQuery query;
+    query.exec("SELECT * FROM Technicien WHERE UPPER(idUtilisateur) = UPPER('" + identifiant + "')");
+    if (query.next()) {
+        technicien = new Technicien(query.value(0).toString());
+        listUtilisateurs[identifiant] = technicien;
     }
 
-    return nullptr;
+    return technicien;
 }
 
 const QMap<QString, Utilisateur*>& GestionnaireDialogue::getUtilisateurs() const {
     return listUtilisateurs;
+}
+
+void GestionnaireDialogue::chargerTickets(Client &client) {
+    QSqlQuery query;
+    query.exec("SELECT * FROM Ticket WHERE UPPER(idClient) = UPPER('" + client.getId() + "')");
+
+    while(query.next()) {
+        Categorie c = Categorie::assistance;
+        QString categorie = query.value("nomCategorie").toString();
+        if(categorie == "Logiciel") c = Categorie::logiciel;
+        if(categorie == "Materiel") c = Categorie::materiel;
+        if(categorie == "Securite") c = Categorie::securite;
+
+        Ticket *ticket = new Ticket(query.value("informations").toString(), c);
+        client.ajouterTicket(*ticket);
+        ticket->setIdTicket(query.value("idTicket").toString());
+        if(query.value("ouvert").toInt() != 1) ticket->fermer();
+        ticket->setDateCreation(query.value("dateCreation").toDate());
+
+        QSqlQuery technicienQuery;
+        technicienQuery.exec("SELECT * FROM Techinicien WHERE UPPER(idTicket) = UPPER('" + ticket->getIdTicket() + "')");
+        if(technicienQuery.next()) {
+            QString idTechnicien = technicienQuery.value("idUtilisateur").toString();
+            Technicien *technicien;
+            if(listUtilisateurs.count(idTechnicien)) {
+                technicien = (Technicien*) listUtilisateurs[idTechnicien];
+            } else {
+                technicien = new Technicien(idTechnicien);
+                listUtilisateurs[idTechnicien] = technicien;
+            }
+            technicien->setTicket(ticket);
+        }
+    }
 }
 
 void GestionnaireDialogue::assignerTicket(Ticket* ticket) {

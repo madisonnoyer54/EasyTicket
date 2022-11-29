@@ -25,6 +25,10 @@ Ticket& Client::getTicket(int pos) const {
     return *listTickets->at(pos);
 }
 
+void Client::ajouterTicket(Ticket &ticket) {
+    listTickets->push_back(&ticket);
+}
+
 const QVector<Ticket*>& Client::getTickets() const {
     return *listTickets;
 }

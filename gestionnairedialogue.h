@@ -10,10 +10,16 @@
 #include "objetobserve.h"
 /// Permet de gérer une hashmap d'utilisateur
 #include <QMap>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QVariant>
+#include <QDebug>
+#include <QFile>
+#include <QDir>
 
 /** @brief La classe GestionnaireDialogue est la classe qui permet d'interagir avec les différents utilisateurs
  **
- ** @version 2b
+ ** @version 3b
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
@@ -24,6 +30,7 @@ class GestionnaireDialogue : public ObjetObserve
        QMap<QString, Utilisateur*> &listUtilisateurs;
        /// @brief Variable qui contient la file d'attente des tickets non traité
        QVector<Ticket*> fileTicket;
+       QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");;
 
     public:
         /// @brief Le constructeur
@@ -61,6 +68,10 @@ class GestionnaireDialogue : public ObjetObserve
         ///
         /// @param technicien Le technicien
         void assignerTicket(Technicien* technicien);
+
+    private:
+
+        void chargerTickets(Client &client);
 };
 
 #endif // GESTIONNAIREDIALOGUE_H
