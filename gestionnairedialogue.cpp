@@ -1,10 +1,25 @@
 #include "gestionnairedialogue.h"
 #include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QVariant>
+#include <QDebug>
 
 GestionnaireDialogue::GestionnaireDialogue() :
     listUtilisateurs(*new QMap<QString, Utilisateur*>())
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    if(!QFile::exists())
+    db.setDatabaseName(":/ressources/EasyTicket.db");
+    qDebug() << "Julien";
+    db.open();
+
+    QSqlQuery query;
+    query.exec("SELECT * FROM Client");
+
+    while (query.next()) {
+            QString name = query.value(0).toString();
+            qDebug() << name;
+        }
 }
 
 GestionnaireDialogue::~GestionnaireDialogue()
