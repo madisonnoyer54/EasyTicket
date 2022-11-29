@@ -3,23 +3,31 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QDebug>
+#include <QFile>
+#include <QDir>
 
 GestionnaireDialogue::GestionnaireDialogue() :
     listUtilisateurs(*new QMap<QString, Utilisateur*>())
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    if(!QFile::exists())
-    db.setDatabaseName(":/ressources/EasyTicket.db");
-    qDebug() << "Julien";
+
+    QString targetDb = QDir::currentPath().append("/EasyTicket.db");
+    if(!QFile::exists(targetDb)){
+        QFile::copy(":/ressources/EasyTicket.db", targetDb);
+    }
+
+    db.setDatabaseName(targetDb);
     db.open();
 
     QSqlQuery query;
-    query.exec("SELECT * FROM Client");
 
+    query.exec("SELECT Client.* FROM Client");
     while (query.next()) {
             QString name = query.value(0).toString();
             qDebug() << name;
         }
+
+    db.close();
 }
 
 GestionnaireDialogue::~GestionnaireDialogue()
