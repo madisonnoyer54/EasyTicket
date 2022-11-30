@@ -1,14 +1,20 @@
 #include "gestionnairedialogue.h"
+#include <QStandardPaths>
 
 GestionnaireDialogue::GestionnaireDialogue() :
     listUtilisateurs(*new QMap<QString, Utilisateur*>())
 {
-    QString targetDb = QDir::currentPath().append("/EasyTicket.db");
+    QString targetDb = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QDir dir(targetDb);
+    if(!dir.exists()) {
+        dir.mkdir(targetDb);
+    }
+    targetDb = targetDb.append("/EasyTicket.db");
     if(!QFile::exists(targetDb)){
         QFile::copy(":/ressources/EasyTicket.db", targetDb);
     }
+    qDebug() << targetDb;
     QFile::setPermissions(targetDb, QFileDevice::WriteUser);
-    QFile::setPermissions(targetDb, QFileDevice::ReadUser);
 
     db.setDatabaseName(targetDb);
     db.open();
