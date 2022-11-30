@@ -14,10 +14,12 @@
 /// Permet de gérer l'affichage sur la sortie standard
 #include <iostream>
 
+class Ticket;
+
 /** @brief La classe Client est la classe qui permet de crée le compte client d'une personne, on lui attribuer un ou plusieur ticket
  ** La class Client hérite de la classe Utilisateur
  **
- ** @version 2a
+ ** @version 3b
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/

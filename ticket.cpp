@@ -1,6 +1,6 @@
 #include "ticket.h"
 
-Ticket::Ticket(QString informations, Categorie categorie) : informations(informations), categorie(categorie)
+Ticket::Ticket(Client *client, QString informations, Categorie categorie) : informations(informations), categorie(categorie), client(client)
 {
     listMessages = new QVector<Message*>();
     ouvert = true;
@@ -44,6 +44,10 @@ void Ticket::setCategorie(Categorie categorie) {
 
 Technicien* Ticket::getTechnicien() const {
     return technicien;
+}
+
+Client* Ticket::getClient() const {
+    return client;
 }
 
 void Ticket::setTechnicien(Technicien* technicien) {

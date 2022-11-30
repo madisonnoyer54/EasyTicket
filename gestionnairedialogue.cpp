@@ -13,7 +13,6 @@ GestionnaireDialogue::GestionnaireDialogue() :
     if(!QFile::exists(targetDb)){
         QFile::copy(":/ressources/EasyTicket.db", targetDb);
     }
-    qDebug() << targetDb;
     QFile::setPermissions(targetDb, QFileDevice::WriteUser);
 
     db.setDatabaseName(targetDb);
@@ -72,7 +71,7 @@ Technicien* GestionnaireDialogue::getTechnicien(QString identifiant){
                 if(categorie == "Materiel") c = Categorie::materiel;
                 if(categorie == "Securite") c = Categorie::securite;
 
-                Ticket *ticket = new Ticket(ticketQuery.value("informations").toString(), c);
+                Ticket *ticket = new Ticket(nullptr, ticketQuery.value("informations").toString(), c);
                 ticket->setIdTicket(ticketQuery.value("idTicket").toString());
                 if(ticketQuery.value("ouvert").toInt() != 1) ticket->fermer();
                 ticket->setDateCreation(ticketQuery.value("dateCreation").toDate());
@@ -102,14 +101,14 @@ void GestionnaireDialogue::chargerTickets(Client &client) {
         if(categorie == "Materiel") c = Categorie::materiel;
         if(categorie == "Securite") c = Categorie::securite;
 
-        Ticket *ticket = new Ticket(query.value("informations").toString(), c);
+        Ticket *ticket = new Ticket(&client, query.value("informations").toString(), c);
         client.ajouterTicket(*ticket);
         ticket->setIdTicket(query.value("idTicket").toString());
         if(query.value("ouvert").toInt() != 1) ticket->fermer();
         ticket->setDateCreation(query.value("dateCreation").toDate());
 
         QSqlQuery technicienQuery;
-        technicienQuery.exec("SELECT * FROM Technicien WHERE UPPER(idTicket) = UPPER('" + ticket->getIdTicket() + "')");
+        technicienQuery.exec("SELECT * FROM Technicien WHERE UPPER(idTicket) = UPPER('" + ticket->getIdTicket() + "') AND UPPER(idClient) = UPPER('" + client.getId() + "')");
         if(technicienQuery.next()) {
             QString idTechnicien = technicienQuery.value("idUtilisateur").toString();
             Technicien *technicien;
@@ -160,10 +159,8 @@ void GestionnaireDialogue::assignerTicket(Ticket* ticket) {
         query.finish();
 
         QSqlQuery queryTechnicien;
-        qDebug() << "UPDATE Technicien SET idTicket = '" + ticket->getIdTicket() + "' WHERE UPPER(idUtilisateur) = UPPER('" + idTechnicien +"')";
-        qDebug() << queryTechnicien.prepare("UPDATE Technicien SET idTicket = '" + ticket->getIdTicket() + "' WHERE UPPER(idUtilisateur) = UPPER('" + idTechnicien +"')");
+        queryTechnicien.prepare("UPDATE Technicien SET idTicket = '" + ticket->getIdTicket() + "', idClient = '" + ticket->getClient()->getId() + "' WHERE UPPER(idUtilisateur) = UPPER('" + idTechnicien +"')");
         queryTechnicien.exec();
-        qDebug() << queryTechnicien.lastError();
     }
 
     notifier();

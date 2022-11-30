@@ -11,7 +11,7 @@ Client::~Client()
 }
 
 Ticket& Client::nouveauTicket(QString informations, Categorie categorie){
-    Ticket* ticket = new Ticket(informations, categorie);
+    Ticket* ticket = new Ticket(this, informations, categorie);
 
     // Id du ticket qui sera l'identifiant de l'utilisateur suivis d'un numéro
 

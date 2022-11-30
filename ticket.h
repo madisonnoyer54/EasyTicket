@@ -8,6 +8,7 @@
 // Pour définir la classe technicien
 // qui représente le technicien qui gèrera la classe
 #include "technicien.h"
+#include "client.h"
 // Pour que le ticket connaisse une liste de ticket
 #include "message.h"
 // Pour permettre au ticket d'hérite de objectObserve
@@ -16,6 +17,7 @@
 #include <QDate>
 
 class Technicien;
+class Client;
 
 /** @brief La classe Ticket est la classe qui permet de créer un ticket
  **
@@ -24,7 +26,7 @@ class Technicien;
  **
  ** Cette classe hérite de ObjetObserve
  **
- ** @version 3a
+ ** @version 3b
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
@@ -47,6 +49,7 @@ class Ticket : public ObjetObserve
 
         /// @brief Variable qui désigne le technicien qui s'occupe du ticket
         Technicien* technicien = nullptr;
+        Client *client;
 
         /// @brief Variable qui désigne la liste des messages du ticket
         QVector<Message *> *listMessages;
@@ -61,7 +64,7 @@ class Ticket : public ObjetObserve
         ///
         /// @param informations Informations rentré par le client sur le ticket
         /// @param categorie Categorie du ticket choisis par le client
-        Ticket(QString informations, Categorie categorie);
+        Ticket(Client *client, QString informations, Categorie categorie);
 
         /// @brief le destructeur ne fait rien
         ~Ticket();
@@ -130,6 +133,7 @@ class Ticket : public ObjetObserve
         ///
         /// @param date La date de création
         void setDateCreation(QDate date);
+        Client* getClient() const;
 
         /// @brief La méthode qui permet de retourner la liste des messages
         ///
