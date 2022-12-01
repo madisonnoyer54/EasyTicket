@@ -13,7 +13,7 @@ GestionnaireDialogue::GestionnaireDialogue() :
     if(!QFile::exists(targetDb)){
         QFile::copy(":/ressources/EasyTicket.db", targetDb);
     }
-    QFile(targetDb).setPermissions(QFileDevice::WriteOther | QFileDevice::ReadOther | QFileDevice::ExeOther);
+    QFile(targetDb).setPermissions(QFileDevice::WriteUser | QFileDevice::ReadUser | QFileDevice::ExeUser);
 
     db.setDatabaseName(targetDb);
     db.open();
