@@ -29,8 +29,10 @@ void TechnicienWidget::setTechnicien(Technicien *technicien) {
 
 void TechnicienWidget::on_fermerTicket_clicked()
 {
+    gestionnaire->fermerTicket(*technicien->getTicket());
     technicien->fermerTicket();
     gestionnaire->assignerTicket(technicien);
+    reagir();
 }
 
 void TechnicienWidget::on_changeCategorie_clicked()
@@ -42,11 +44,14 @@ void TechnicienWidget::on_changeCategorie_clicked()
     if(ui->Materiel->isChecked()) c = Categorie::materiel;
     if(ui->Securite->isChecked()) c = Categorie::securite;
 
-    ticket.setCategorie(c);
+    gestionnaire->changeCategorie(ticket, c);
     ticket.setTechnicien(nullptr);
     technicien->setTicket(nullptr);
-    gestionnaire->assignerTicket(&ticket);
-    gestionnaire->assignerTicket(technicien);
+    if(technicien->peutTraiter(ticket)) technicien->setTicket(&ticket);
+    else {
+        gestionnaire->assignerTicket(&ticket);
+        gestionnaire->assignerTicket(technicien);
+    }
 }
 
 void TechnicienWidget::reagir() {
@@ -77,6 +82,7 @@ void TechnicienWidget::afficheDonnee() {
                 ui->Securite->setChecked(true);
             break;
     }
+    gestionnaire->chargerMessages(*technicien->getTicket());
     QStringList list;
     for(Message *message : ticket->getMessages().toStdVector())  list << "<" + message->getUtilisateur()->getId() + "> " + message->getContenu();
     model->setStringList(list);
@@ -114,7 +120,7 @@ void TechnicienWidget::activer() {
 
 void TechnicienWidget::on_envoyer_clicked()
 {
-    technicien->getTicket()->ajouterMessage(*technicien, ui->textMessage->toPlainText());
+    gestionnaire->ajouterMessage(technicien->getTicket()->ajouterMessage(*technicien, ui->textMessage->toPlainText()));
     ui->textMessage->setText("");
     reagir();
 }

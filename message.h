@@ -3,14 +3,18 @@
 
 // Pour la gestion de l'identifiant et du contenu
 #include <QString>
+#include <QDate>
 // Permet au message d'avoir son utilisateur
 #include "utilisateur.h"
+#include "ticket.h"
+
+class Ticket;
 
 class Utilisateur;
 
 /** @brief La classe Message est la classe qui permet de créer un message envoyé par un utilisateur par rapport a un ticket
  **
- ** @version 2c
+ ** @version 3b
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
@@ -19,18 +23,19 @@ class Message
     private:
         /// @brief Variable qui contient l'identifient du message
         QString idMessage;
+        Ticket &ticket;
         /// @brief Variable qui contient le contenu du message
         QString contenu;
         /// @brief Variable qui contient l'auteur du message
         Utilisateur *auteur;
+        QDate date;
 
     public:
         /// @brief Le constructeur par défaut
         ///
         /// @param utilisateur L'utilisateur a l'origine du message
-        /// @param idMessage L'identifiant du message
         /// @param contenu le contenu du message
-        Message(Utilisateur &utilisateur, QString idMessage, QString contenu);
+        Message(Ticket &ticket, Utilisateur &utilisateur, QString contenu);
 
         /// @brief le destructeur
         ~Message();
@@ -49,6 +54,8 @@ class Message
         ///
         /// @return L'auteur du message
         Utilisateur *getUtilisateur() const;
+        Ticket &getTicket() const;
+        QDate getDateCreation() const;
 
         /// @brief La méthode qui permet de définir le contenu d'un message
         ///
@@ -65,7 +72,7 @@ class Message
         /// @param utilisateur Le nouvel utilisateur du message
         void setUtilisateur(Utilisateur &utilisateur);
 
-
+        void setDateCreation(QDate date);
 
 };
 

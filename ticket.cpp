@@ -66,7 +66,18 @@ const QVector<Message *> &Ticket::getMessages() const {
     return *listMessages;
 }
 
-void Ticket::ajouterMessage(Utilisateur &utilisateur, QString message) {
-    listMessages->append(new Message(utilisateur, "1",message));
+Message &Ticket::ajouterMessage(Utilisateur &utilisateur, QString message) {
+    Message *msg = new Message(*this, utilisateur,message);
+    listMessages->append(msg);
     notifier();
+
+    return *msg;
+}
+
+#include <QDebug>
+
+void Ticket::ajouterMessage(Message &message) {
+    bool isIn = false;
+    for(Message *messageInList : listMessages->toStdVector()) isIn |=  (messageInList->getIdMessage() == message.getIdMessage());
+    if(!isIn) listMessages->push_back(&message);
 }

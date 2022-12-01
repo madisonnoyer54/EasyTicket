@@ -1,8 +1,9 @@
 #include "message.h"
 
 
-Message::Message(Utilisateur &utilisateur, QString idMessage, QString contenu) : idMessage(idMessage), contenu(contenu), auteur(&utilisateur)
+Message::Message(Ticket &ticket, Utilisateur &utilisateur, QString contenu) : ticket(ticket), contenu(contenu), auteur(&utilisateur)
 {
+    date = QDate::currentDate();
 }
 
 Message::~Message(){
@@ -22,6 +23,14 @@ Utilisateur* Message::getUtilisateur() const{
     return auteur;
 }
 
+Ticket &Message::getTicket() const {
+    return ticket;
+}
+
+QDate Message::getDateCreation() const {
+    return date;
+}
+
 void Message::setContenu(QString contenu){
     this->contenu = contenu;
 }
@@ -32,4 +41,8 @@ void Message::setIdMessage(QString idMessage){
 
 void Message::setUtilisateur(Utilisateur &utilisateur){
     this->auteur = &utilisateur;
+}
+
+void Message::setDateCreation(QDate date) {
+    this->date = date;
 }

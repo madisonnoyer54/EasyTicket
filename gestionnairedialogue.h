@@ -69,6 +69,16 @@ class GestionnaireDialogue : public ObjetObserve
         /// @param technicien Le technicien
         void assignerTicket(Technicien* technicien);
 
+        void fermerTicket(Ticket &ticket);
+
+        void nouveauTicket(Ticket &ticket);
+
+        void changeCategorie(Ticket &ticket, Categorie categorie);
+
+        void ajouterMessage(Message &message);
+
+        void chargerMessages(Ticket &ticket);
+
     private:
 
         void chargerTickets(Client &client);

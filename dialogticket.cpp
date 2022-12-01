@@ -60,11 +60,12 @@ DialogTicket::~DialogTicket()
 
 void DialogTicket::on_Envoyer_clicked()
 {
-    ticket.ajouterMessage(client, ui->textMessage->toPlainText());
+    gestionnaire.ajouterMessage(ticket.ajouterMessage(client, ui->textMessage->toPlainText()));
     ui->textMessage->setText("");
 }
 
 void DialogTicket::reagir() {
+    gestionnaire.chargerMessages(ticket);
     QStringList list;
     for(Message *message : ticket.getMessages().toStdVector())
     list << "<" + message->getUtilisateur()->getId() + "> " + message->getContenu();

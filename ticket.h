@@ -18,6 +18,7 @@
 
 class Technicien;
 class Client;
+class Message;
 
 /** @brief La classe Ticket est la classe qui permet de créer un ticket
  **
@@ -146,7 +147,8 @@ class Ticket : public ObjetObserve
         /// @param utilisateur L'utilisateur qui envoit le message
         ///
         /// @param message Contenu du message
-        void ajouterMessage(Utilisateur &utilisateur, QString message);
+        Message &ajouterMessage(Utilisateur &utilisateur, QString message);
+        void ajouterMessage(Message &message);
 };
 
 #endif // TICKET_H

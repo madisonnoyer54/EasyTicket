@@ -29,6 +29,6 @@ void DialogNouveauTicket::on_buttonBox_accepted()
     if(ui->Logiciel->isChecked()) c = Categorie::logiciel;
     if(ui->Materiel->isChecked()) c = Categorie::materiel;
     if(ui->Securite->isChecked()) c = Categorie::securite;
-    gestionnaire->assignerTicket(&client->nouveauTicket(ui->informationsText->toPlainText(), c));
+    gestionnaire->nouveauTicket(client->nouveauTicket(ui->informationsText->toPlainText(), c));
 }
 
