@@ -10,11 +10,16 @@
 #include "objetobserve.h"
 /// Permet de gérer une hashmap d'utilisateur
 #include <QMap>
+/// Permet de gérer la base de donnée
 #include <QSqlDatabase>
+/// Permet de gérer les requetes vers la base de donnée
 #include <QSqlQuery>
+/// Permet de gérer les résultats des requetes
 #include <QVariant>
 #include <QDebug>
+/// Permet de gérer les fichiers pour copier la base de donnée en local
 #include <QFile>
+/// Permet de gérer les dossiers pour créer le dossier qui contiendra la base de donnée
 #include <QDir>
 
 /** @brief La classe GestionnaireDialogue est la classe qui permet d'interagir avec les différents utilisateurs
@@ -28,8 +33,7 @@ class GestionnaireDialogue : public ObjetObserve
     private:
        /// @brief Variable qui contient la hashmap des utilisateurs par rapport à leur identifiant
        QMap<QString, Utilisateur*> &listUtilisateurs;
-       /// @brief Variable qui contient la file d'attente des tickets non traité
-       QVector<Ticket*> fileTicket;
+       /// @brief Variable qui contient la base de donnée
        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");;
 
     public:
@@ -69,19 +73,48 @@ class GestionnaireDialogue : public ObjetObserve
         /// @param technicien Le technicien
         void assignerTicket(Technicien* technicien);
 
+        /// @brief La méthode qui permet de fermer une ticket
+        ///
+        /// @param ticket Référence vers le ticket
         void fermerTicket(Ticket &ticket);
 
+        /// @brief La méthode qui permet d'ajouter un nouveau ticket dans la base de donnée
+        ///
+        /// @param ticket Référence vers le nouveau ticket
         void nouveauTicket(Ticket &ticket);
 
+        /// @brief La méthode qui permet de changer la catégorie d'un ticket
+        ///
+        /// @param ticket Référence vers le ticket
+        /// @param categorie Categorie du ticket
         void changeCategorie(Ticket &ticket, Categorie categorie);
 
+        /// @brief La méthode qui permet de rajouter un message dans la base de donnée
+        ///
+        /// @param message Référence vers un message
         void ajouterMessage(Message &message);
 
+        /// @brief La méthode qui permet de charger les messages en liens avec un ticket
+        ///
+        /// @param ticket Référence vers le ticket
         void chargerMessages(Ticket &ticket);
 
     private:
 
+        /// @brief La méthode qui permet de charger les tickets d'un client
+        ///
+        /// @param client Référence vers le client
         void chargerTickets(Client &client);
+
+        /// @brief La méthode qui permet de charger un technicien de la base de donnée
+        ///
+        /// @param identifiant Identifiant du technicien
+        Technicien* chargerTechnicien(QString identifiant);
+
+        /// @brief La méthode qui permet de charger un client de la base de donnée
+        ///
+        /// @param identifiant Identifiant du client
+        Client* chargerClient(QString identifiant);
 };
 
 #endif // GESTIONNAIREDIALOGUE_H

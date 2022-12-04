@@ -24,7 +24,6 @@ void TechnicienWidget::setTechnicien(Technicien *technicien) {
 
     // Ajout des catégories pour pouvoir test
     parentWidget()->setWindowTitle("EasyTicket - Technicien : " + technicien->getId());
-    reagir();
 }
 
 void TechnicienWidget::on_fermerTicket_clicked()
@@ -47,6 +46,7 @@ void TechnicienWidget::on_changeCategorie_clicked()
     gestionnaire->changeCategorie(ticket, c);
     ticket.setTechnicien(nullptr);
     technicien->setTicket(nullptr);
+    qDebug() << technicien->peutTraiter(ticket);
     if(technicien->peutTraiter(ticket)) technicien->setTicket(&ticket);
     else {
         gestionnaire->assignerTicket(&ticket);

@@ -17,28 +17,24 @@ DialogTicket::DialogTicket(GestionnaireDialogue &gestionnaire, Client &client, T
     ui->contenuTicket->setText(ticket.getInformations());
     ui->idTicket->setText(ticket.getIdTicket());
 
-    switch(ticket.getCategorie()) {
-        case Categorie::assistance:
-            ui->categorie->setText("Assistance");
-            break;
-        case Categorie::logiciel:
-            ui->categorie->setText("Logiciel");
-            break;
-        case Categorie::materiel:
-            ui->categorie->setText("Materiel");
-            break;
-        case Categorie::securite:
-            ui->categorie->setText("Securite");
-            break;
-    }
+    ui->categorie->setText(categorie_to_str(ticket.getCategorie()));
 
-    QDate  dateCreation = ticket.getDateCreation();
-    QString date(QString::number(dateCreation.day()));
-    date.append("/");
-    date.append(QString::number(dateCreation.month()));
-    date.append("/");
-    date.append(QString::number(dateCreation.year()));
-    ui->dateTicket->setText(date);
+    QDateTime  dateCreation = ticket.getDateCreation();
+    QDate date = dateCreation.date();
+    QTime time = dateCreation.time();
+    QString dateStr(QString::number(date.day()));
+    dateStr.append("/");
+    dateStr.append(QString::number(date.month()));
+    dateStr.append("/");
+    dateStr.append(QString::number(date.year()));
+    dateStr.append(" à ");
+    dateStr.append(QString::number(time.hour()));
+    dateStr.append(" heure, ");
+    dateStr.append(QString::number(time.minute()));
+    dateStr.append(" minutes et ");
+    dateStr.append(QString::number(time.second()));
+    dateStr.append(" secondes.");
+    ui->dateTicket->setText(dateStr);
 
     Technicien *technicien = ticket.getTechnicien();
     if(technicien == nullptr) {

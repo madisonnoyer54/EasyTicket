@@ -3,7 +3,7 @@
 
 Message::Message(Ticket &ticket, Utilisateur &utilisateur, QString contenu) : ticket(ticket), contenu(contenu), auteur(&utilisateur)
 {
-    date = QDate::currentDate();
+    date = QDateTime::currentDateTime();
 }
 
 Message::~Message(){
@@ -27,7 +27,7 @@ Ticket &Message::getTicket() const {
     return ticket;
 }
 
-QDate Message::getDateCreation() const {
+QDateTime Message::getDateCreation() const {
     return date;
 }
 
@@ -43,6 +43,6 @@ void Message::setUtilisateur(Utilisateur &utilisateur){
     this->auteur = &utilisateur;
 }
 
-void Message::setDateCreation(QDate date) {
+void Message::setDateCreation(QDateTime date) {
     this->date = date;
 }

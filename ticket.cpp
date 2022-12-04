@@ -4,7 +4,7 @@ Ticket::Ticket(Client *client, QString informations, Categorie categorie) : info
 {
     listMessages = new QVector<Message*>();
     ouvert = true;
-    dateCreation = QDate::currentDate();
+    dateCreation = QDateTime::currentDateTime();
 }
 
 Ticket::~Ticket(){
@@ -54,11 +54,11 @@ void Ticket::setTechnicien(Technicien* technicien) {
     this->technicien = technicien;
 }
 
-const QDate &Ticket::getDateCreation() const {
+const QDateTime &Ticket::getDateCreation() const {
     return dateCreation;
 }
 
-void Ticket::setDateCreation(QDate date) {
+void Ticket::setDateCreation(QDateTime date) {
     dateCreation = date;
 }
 
@@ -73,8 +73,6 @@ Message &Ticket::ajouterMessage(Utilisateur &utilisateur, QString message) {
 
     return *msg;
 }
-
-#include <QDebug>
 
 void Ticket::ajouterMessage(Message &message) {
     bool isIn = false;

@@ -14,7 +14,7 @@ class DialogNouveauTicket;
  * @brief La class DialogNouveauTicket hérite de la classe QDialog
  * C'est un dialog qui permet de créer un nouveau ticket
  *
- * @version 1e
+ * @version 3b
  *
  * @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  */

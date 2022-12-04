@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     administrateur.cpp \
+    categorie.cpp \
     clientwidget.cpp \
     connexionwidget.cpp \
     dialognouveauticket.cpp \

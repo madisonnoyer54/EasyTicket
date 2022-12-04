@@ -38,10 +38,10 @@ void ClientWidget::setClient(Client *client) {
 void ClientWidget::reagir() {
     QStringList list;
     QVector<Ticket *> listTicket = client->getTickets();
-    QDate dateInf = ui->dateInf->date();
-    QDate dateSup = ui->dateSup->date();
+    QDateTime dateInf = ui->dateInf->dateTime();
+    QDateTime dateSup = ui->dateSup->dateTime();
     for(int i = 0; i < listTicket.size(); i++) {
-        QDate dateTicket = listTicket[i]->getDateCreation();
+        QDateTime dateTicket = listTicket[i]->getDateCreation();
         if(dateTicket <= dateInf && dateTicket >= dateSup)
             list << listTicket[i]->getIdTicket() + " :\n" + listTicket[i]->getInformations() + "\n" + (listTicket[i]->estOuvert() ? "Ouvert" : "Fermer");
     }
