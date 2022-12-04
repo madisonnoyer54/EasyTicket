@@ -60,7 +60,7 @@
        <item>
         <widget class="QRadioButton" name="Administrateur">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">

@@ -17,13 +17,19 @@
  **/
 class Administrateur : public Utilisateur
 {
-public:
-    /// @brief Le constructeur par défaut
-    ///
-    Administrateur(QString);
+    public:
+        /// @brief Le constructeur par défaut
+        ///
+        /// @param identifiant L'indentifiant de l'utilisateur
+        Administrateur(QString identifiant);
 
-     /// @brief le destructeur ne fait rien
-    ~Administrateur();
+         /// @brief le destructeur ne fait rien
+        ~Administrateur();
+
+        /// @brief La méthode qui permet de savoir si l'utilisateur est un client
+        ///
+        /// @return false
+        bool estUnClient() override;
 };
 
 #endif // ADMINISTRATEUR_H

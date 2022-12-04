@@ -1,6 +1,8 @@
 #ifndef GESTIONNAIREDIALOGUE_H
 #define GESTIONNAIREDIALOGUE_H
 
+/// Permet de retourner un objet de type Administrateur pour la fonction getClient
+#include "administrateur.h"
 /// Permet de retourner un objet de type Client pour la fonction getClient
 #include "client.h"
 /// Permet de retourner un objet de type Technicien pour la fonction getTechnicien
@@ -56,6 +58,13 @@ class GestionnaireDialogue : public ObjetObserve
         ///
         /// @return Le technicien possédant l'identifiant entré en paramètre
         Technicien* getTechnicien(QString identifiant);
+
+        /// @brief La méthode qui permet de retourner l'admnistrateur par rapport à son identifiant
+        ///
+        /// @param identifiant Identifiant de l'admnistrateur
+        ///
+        /// @return L'admnistrateur possédant l'identifiant entré en paramètre
+        Administrateur* getAdministrateur(QString identifiant);
 
         /// @brief La méthode qui permet d'avoir la map des utilisateurs
         ///

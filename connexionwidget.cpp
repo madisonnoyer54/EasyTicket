@@ -52,6 +52,14 @@ void ConnexionWidget::on_connexion_clicked()
             parentWidget()->layout()->addWidget(technitienWidget);
         }
     }
+    if(ui->Administrateur->isChecked()) {
+        Administrateur *administrateur = gestionnaire->getAdministrateur(ui->identifiantText->text());
+        if(administrateur == nullptr) {
+            ui->progressBar->setVisible(false);
+            ui->errorLabel->setVisible(true);
+            ui->errorLabel->setText("Impossible d'identifier l'administrateur : " + ui->identifiantText->text());
+        }
+    }
 }
 
 

@@ -37,7 +37,7 @@ GestionnaireDialogue::~GestionnaireDialogue()
     db.close();
 }
 
-Client* GestionnaireDialogue::getClient(QString identifiant){
+Client* GestionnaireDialogue::getClient(QString identifiant) {
 
     Client *client = nullptr;
 
@@ -53,6 +53,30 @@ Client* GestionnaireDialogue::getClient(QString identifiant){
     }
 
     return client;
+}
+
+Administrateur* GestionnaireDialogue::getAdministrateur(QString identifiant) {
+    Administrateur *administrateur = nullptr;
+
+    // La map possède t'elle une valeur pour l'identifiant ?
+    if(listUtilisateurs.contains(identifiant)) {
+        if(listUtilisateurs[identifiant]->estUnClient()) administrateur = (Administrateur*) listUtilisateurs[identifiant];
+        else administrateur = nullptr;
+    }
+
+    if(administrateur == nullptr) {
+        // L'administrateur n'est pas dans la liste des utilisateurs déjà chargés
+        QSqlQuery query;
+        query.exec("SELECT * FROM Administrateur WHERE UPPER(idUtilisateur) = UPPER('" + identifiant + "')");
+        if (query.first()) {
+            // On créer l'administrateur avec son id et on le rajoute à la liste des utilisateurs
+
+            administrateur = new Administrateur(query.value(0).toString());
+            listUtilisateurs[identifiant] = administrateur;
+        }
+    }
+
+    return administrateur;
 }
 
 Client* GestionnaireDialogue::chargerClient(QString identifiant) {
