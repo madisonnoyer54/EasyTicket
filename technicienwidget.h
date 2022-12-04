@@ -20,7 +20,7 @@ class TechnicienWidget;
  *
  * Cette classe hérite de QWidget de Observeur
  *
- * @version 3b
+ * @version 3c
  *
  * @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  */
@@ -79,11 +79,6 @@ public:
         /// traité
         void reagir() override;
 
-    private:
-        /// @brief Methode qui permet d'afficher les informations du ticket sur l'affichage graphique
-        ///
-        /// Affichage de l'id du ticket, des informations et de la categorie
-        void afficheDonnee();
 
         /// @brief Methode qui permet de desactiver les boutons et textinput
         /// lors que le technicien n'a plus de ticket a traiter
@@ -92,6 +87,12 @@ public:
         /// @brief Methode qui permet d'activer les boutons et textinput
         /// lors que le technicien a un ticket a traiter
         void activer();
+
+    private:
+        /// @brief Methode qui permet d'afficher les informations du ticket sur l'affichage graphique
+        ///
+        /// Affichage de l'id du ticket, des informations et de la categorie
+        void afficheDonnee();
 };
 
 #endif // TECHNICIENWIDGET_H

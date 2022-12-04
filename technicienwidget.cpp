@@ -102,6 +102,7 @@ void TechnicienWidget::desactiver() {
     ui->textMessage->setDisabled(true);
     ui->envoyer->setDisabled(true);
     ui->messageList->setDisabled(true);
+    ui->assignerTicket->setDisabled(true);
     model->setStringList(*new QStringList());
 }
 
@@ -115,6 +116,7 @@ void TechnicienWidget::activer() {
     ui->textMessage->setEnabled(true);
     ui->envoyer->setEnabled(true);
     ui->messageList->setEnabled(true);
+    ui->assignerTicket->setEnabled(true);
 }
 
 void TechnicienWidget::on_envoyer_clicked()

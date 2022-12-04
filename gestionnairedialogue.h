@@ -24,7 +24,7 @@
 
 /** @brief La classe GestionnaireDialogue est la classe qui permet d'interagir avec les différents utilisateurs
  **
- ** @version 3b
+ ** @version 3c
  **
  ** @author Madison NOYER, Julien POINCET, Erwan DIEBOLD
  **/
