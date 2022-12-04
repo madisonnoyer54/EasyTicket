@@ -122,6 +122,10 @@ class GestionnaireDialogue : public ObjetObserve
         /// @param ticket Référence vers un ticket
         void assignerTicket(Technicien &technicien, Ticket &ticket);
 
+        int getNbTicket();
+        int getNbTicketFerme();
+        int getNbTicket(Categorie categorie);
+
     private:
 
         /// @brief La méthode qui permet de charger les tickets d'un client

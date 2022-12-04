@@ -376,3 +376,25 @@ void GestionnaireDialogue::assignerTicket(Technicien &technicien, Ticket &ticket
 
     notifier();
 }
+
+
+int GestionnaireDialogue::getNbTicket() {
+    QSqlQuery query;
+    query.exec("SELECT count(*) FROM Ticket");
+    query.first();
+    return query.value(0).toInt();
+}
+
+int GestionnaireDialogue::getNbTicketFerme() {
+    QSqlQuery query;
+    query.exec("SELECT count(*) FROM Ticket WHERE ouvert = 1");
+    query.first();
+    return query.value(0).toInt();
+}
+
+int GestionnaireDialogue::getNbTicket(Categorie categorie) {
+    QSqlQuery query;
+    query.exec("SELECT count(*) FROM Ticket WHERE UPPER(nomCategorie) = UPPER('" + categorie_to_str(categorie) + "')");
+    query.first();
+    return query.value(0).toInt();
+}
