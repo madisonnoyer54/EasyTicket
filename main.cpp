@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     // Et nous les affichons sur la sortie standard
     GestionnaireDialogue* gestionnaire = new GestionnaireDialogue();
 
-    w.setGestionnaire(gestionnaire);
+    w.setGestionnaire(*gestionnaire);
 
 
 

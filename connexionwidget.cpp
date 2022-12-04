@@ -45,8 +45,8 @@ void ConnexionWidget::on_connexion_clicked()
             ui->errorLabel->setVisible(true);
             ui->errorLabel->setText("Impossible d'identifier le technicien : " + ui->identifiantText->text());
         } else {
-            technitienWidget->setTechnicien(technicien);
-            technitienWidget->setGestionnaire(gestionnaire);
+            technitienWidget->setTechnicien(*technicien);
+            technitienWidget->setGestionnaire(*gestionnaire);
             ui->progressBar->setValue(100);
             hide();
             parentWidget()->layout()->addWidget(technitienWidget);

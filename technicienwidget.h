@@ -53,7 +53,9 @@ class TechnicienWidget : public QWidget, Observeur
         /// le technicien
         void on_envoyer_clicked();
 
-    public:
+        void on_assignerTicket_clicked();
+
+public:
         /// @brief Constructeur de widget
         ///
         /// @param parent Parent du widget

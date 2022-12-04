@@ -99,6 +99,20 @@ class GestionnaireDialogue : public ObjetObserve
         /// @param ticket Référence vers le ticket
         void chargerMessages(Ticket &ticket);
 
+        /// @brief La méthode qui permet de savoir la liste des techniciens
+        /// qui peuvent gérer un ticket
+        ///
+        /// @param ticket Référence vers le ticket
+        ///
+        /// @return QVector
+        QVector<Technicien *> &getTechniciensPeuventGerer(Ticket &ticket);
+
+        /// @brief La méthode qui permet d'assigner un ticket à un technicien
+        ///
+        /// @param technicien Référence vers un technicien
+        /// @param ticket Référence vers un ticket
+        void assignerTicket(Technicien &technicien, Ticket &ticket);
+
     private:
 
         /// @brief La méthode qui permet de charger les tickets d'un client

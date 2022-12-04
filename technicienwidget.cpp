@@ -23,7 +23,7 @@ void TechnicienWidget::setTechnicien(Technicien &technicien) {
     this->technicien = &technicien;
 
     // Ajout des catégories pour pouvoir test
-    parentWidget()->setWindowTitle("EasyTicket - Technicien : " + technicien->getId());
+    parentWidget()->setWindowTitle("EasyTicket - Technicien : " + technicien.getId());
 }
 
 void TechnicienWidget::on_fermerTicket_clicked()
@@ -122,5 +122,13 @@ void TechnicienWidget::on_envoyer_clicked()
     gestionnaire->ajouterMessage(technicien->getTicket()->ajouterMessage(*technicien, ui->textMessage->toPlainText()));
     ui->textMessage->setText("");
     reagir();
+}
+
+#include <QtDebug>
+
+void TechnicienWidget::on_assignerTicket_clicked()
+{
+    QVector<Technicien *> techniciens = gestionnaire->getTechniciensPeuventGerer(*technicien->getTicket());
+    for(Technicien *technicien : techniciens) qDebug() << technicien->getId();
 }
 

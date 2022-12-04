@@ -123,7 +123,7 @@ Technicien* GestionnaireDialogue::chargerTechnicien(QString identifiant) {
             technicien->setTicket(ticket);
         } else {
             // Si il ne gère pas de ticket, on va chercher un ticket disponible qu'il peut traiter
-            assignerTicket(technicien);
+            assignerTicket(*technicien);
         }
     }
 
@@ -257,10 +257,9 @@ void GestionnaireDialogue::nouveauTicket(Ticket &ticket) {
 
     // Ajout du ticket dans la base de donnée
     query.exec("INSERT INTO TICKET(idClient, idTechnicien, informations, dateCreation, nomCategorie) VALUES('" + ticket.getClient()->getId() + "', null, '" + ticket.getInformations() + "', date('" + dateString + "') ,'" + categorie + "')");
-    query.lastError();
     ticket.setIdTicket(query.lastInsertId().toString());
 
-    assignerTicket(&ticket);
+    assignerTicket(ticket);
 
     notifier();
 }
@@ -313,4 +312,37 @@ void GestionnaireDialogue::chargerMessages(Ticket &ticket) {
 
         ticket.ajouterMessage(*message);
     }
+}
+
+QVector<Technicien *> &GestionnaireDialogue::getTechniciensPeuventGerer(Ticket &ticket) {
+    QVector<Technicien *> &res = *new QVector<Technicien *>();
+
+    QSqlQuery query;
+    QString categorie = categorie_to_str(ticket.getCategorie());
+    query.exec("SELECT T.idUtilisateur FROM Technicien T, Peut_gerer P WHERE T.idUtilisateur = P.idTechnicien AND idUtilisateur NOT IN (SELECT idTechnicien FROM Ticket WHERE idTechnicien IS NOT NULL) AND UPPER(P.nomCategorie) = UPPER('" + categorie + "')");
+
+    while(query.next()) {
+        // On prend l'id du premier technicien
+        QString idTechnicien = query.value("idUtilisateur").toString();
+        Technicien *technicien;
+
+        // On le cherche dans la liste, si il n'y est pas
+        // On le créer
+        if(listUtilisateurs.contains(idTechnicien)) {
+            technicien = (Technicien *) listUtilisateurs[idTechnicien];
+        } else {
+            technicien = new Technicien(idTechnicien);
+            listUtilisateurs[idTechnicien] = technicien;
+        }
+
+        res.append(technicien);
+    }
+
+    return res;
+}
+
+void GestionnaireDialogue::assignerTicket(Technicien &technicien, Ticket &ticket) {
+    QSqlQuery query;
+
+    query.exec("UPDATE Ticket SET idTechnicien = '" + technicien.getId() + "' WHERE idTicket = " + ticket.getIdTicket());
 }
