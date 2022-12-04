@@ -25,8 +25,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
     private:
+        /// @brief interface graphique de la fenètre
         Ui::MainWindow *ui;
+        /// @brief Affichage de connexion
         ConnexionWidget *connexion;
+        /// @brief Modele du programme
         GestionnaireDialogue *gestionnaire;
 
     public:
@@ -41,12 +44,14 @@ class MainWindow : public QMainWindow
         /// @brief Methode qui permet de définir le modele du logiciel
         ///
         /// @param gestionnaire Modele du logiciel
-        void setGestionnaire(GestionnaireDialogue *gestionnaire);
+        void setGestionnaire(GestionnaireDialogue &gestionnaire);
 
     private slots:
-            void on_MainWindow_destroyed();
+        void on_MainWindow_destroyed();
 
     private:
-            void closeEvent(QCloseEvent *event);
+        /// @brief La méthode qui permet de gérer la destruction du modèle
+        /// a la fermeture de la fenetre
+        void closeEvent(QCloseEvent *event);
 };
 #endif // MAINWINDOW_H

@@ -14,12 +14,12 @@ DialogNouveauTicket::~DialogNouveauTicket()
     delete ui;
 }
 
-void DialogNouveauTicket::setGestionnaire(GestionnaireDialogue *gestionnaire) {
-    this->gestionnaire = gestionnaire;
+void DialogNouveauTicket::setGestionnaire(GestionnaireDialogue &gestionnaire) {
+    this->gestionnaire = &gestionnaire;
 }
 
-void DialogNouveauTicket::setClient(Client *client) {
-    this->client = client;
+void DialogNouveauTicket::setClient(Client &client) {
+    this->client = &client;
 }
 
 void DialogNouveauTicket::on_buttonBox_accepted()

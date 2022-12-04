@@ -67,7 +67,7 @@ public:
         /// @brief Methode qui permet de définir le modele du logiciel
         ///
         /// @param gestionnaire Modele du logiciel
-        void setGestionnaire(GestionnaireDialogue *gestionnaire);
+        void setGestionnaire(GestionnaireDialogue &gestionnaire);
 };
 
 #endif // CONNEXIONWIDGET_H

@@ -1,5 +1,4 @@
 #include "gestionnairedialogue.h"
-#include <QStandardPaths>
 
 GestionnaireDialogue::GestionnaireDialogue() :
     listUtilisateurs(*new QMap<QString, Utilisateur*>())
@@ -173,15 +172,15 @@ void GestionnaireDialogue::chargerTickets(Client &client) {
         } else if(ticket->estOuvert()) {
             // Si le ticket est ouvert et qu'aucun technicien gère le ticket
             // On va chercher a assigner a un technicien le ticket
-            assignerTicket(ticket);
+            assignerTicket(*ticket);
         }
     }
 }
 
-void GestionnaireDialogue::assignerTicket(Ticket* ticket) {
+void GestionnaireDialogue::assignerTicket(Ticket &ticket) {
 
     QSqlQuery query;
-    QString categorie = categorie_to_str(ticket->getCategorie());
+    QString categorie = categorie_to_str(ticket.getCategorie());
     query.exec("SELECT T.idUtilisateur FROM Technicien T, Peut_gerer P WHERE T.idUtilisateur = P.idTechnicien AND idUtilisateur NOT IN (SELECT idTechnicien FROM Ticket WHERE idTechnicien IS NOT NULL) AND UPPER(P.nomCategorie) = UPPER('" + categorie + "')");
 
     if(query.first()) {
@@ -199,22 +198,22 @@ void GestionnaireDialogue::assignerTicket(Ticket* ticket) {
         }
 
         // On lui assigne le ticket
-        technicien->setTicket(ticket);
+        technicien->setTicket(&ticket);
         query.finish();
 
         // Mise à jour de la base de donnée : on donne l'id du technicien au ticket
         QSqlQuery queryTechnicien;
-        queryTechnicien.prepare("UPDATE Ticket SET idTechnicien = '" + idTechnicien + "' WHERE idTicket = " + ticket->getIdTicket());
+        queryTechnicien.prepare("UPDATE Ticket SET idTechnicien = '" + idTechnicien + "' WHERE idTicket = " + ticket.getIdTicket());
         queryTechnicien.exec();
     }
 
     notifier();
 }
 
-void GestionnaireDialogue::assignerTicket(Technicien* technicien) {
+void GestionnaireDialogue::assignerTicket(Technicien &technicien) {
     Ticket *ticket = nullptr;
 
-    for(Categorie categorieTechnicien : technicien->getCategories()) {
+    for(Categorie categorieTechnicien : technicien.getCategories()) {
         QString categorie = categorie_to_str(categorieTechnicien);
         QSqlQuery query;
 
@@ -228,12 +227,11 @@ void GestionnaireDialogue::assignerTicket(Technicien* technicien) {
                 // le plus vieux
                 ticket = new Ticket(nullptr, query.value("informations").toString(), categorieTechnicien);
                 ticket->setIdTicket(query.value("idTicket").toString());
-                qDebug() << ticket->getIdTicket();
                 ticket->setDateCreation(query.value("dateCreation").toDateTime());
-                technicien->setTicket(ticket);
+                technicien.setTicket(ticket);
 
                 // On met à jour la base de donnée
-                query.exec("UPDATE Ticket SET idTechnicien = '" + technicien->getId() + "' WHERE idTicket = " + ticket->getIdTicket());
+                query.exec("UPDATE Ticket SET idTechnicien = '" + technicien.getId() + "' WHERE idTicket = " + ticket->getIdTicket());
             }
         }
     }

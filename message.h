@@ -3,6 +3,7 @@
 
 // Pour la gestion de l'identifiant et du contenu
 #include <QString>
+// Pour la gestion de la date de création du message
 #include <QDateTime>
 // Permet au message d'avoir son utilisateur
 #include "utilisateur.h"
@@ -23,6 +24,7 @@ class Message
     private:
         /// @brief Variable qui contient l'identifient du message
         QString idMessage;
+        /// @brief Variable contenant le ticket avec le quel le message est-il lié
         Ticket &ticket;
         /// @brief Variable qui contient le contenu du message
         QString contenu;
@@ -33,6 +35,7 @@ class Message
     public:
         /// @brief Le constructeur par défaut
         ///
+        /// @param ticket Référence vers le ticket
         /// @param utilisateur L'utilisateur a l'origine du message
         /// @param contenu le contenu du message
         Message(Ticket &ticket, Utilisateur &utilisateur, QString contenu);
@@ -54,7 +57,16 @@ class Message
         ///
         /// @return L'auteur du message
         Utilisateur *getUtilisateur() const;
+
+        /// @brief La méthode qui permet de connaitre une référence vers le ticket
+        /// au quel le message est lié
+        ///
+        /// @return Référence vers le ticket
         Ticket &getTicket() const;
+
+        /// @brief La méthode qui permet de connaitre la date de création du message
+        ///
+        /// @return La date de création du message
         QDateTime getDateCreation() const;
 
         /// @brief La méthode qui permet de définir le contenu d'un message
@@ -72,6 +84,9 @@ class Message
         /// @param utilisateur Le nouvel utilisateur du message
         void setUtilisateur(Utilisateur &utilisateur);
 
+        /// @brief La méthode qui permet de définir la date de création du message
+        ///
+        /// @return La date de création du message
         void setDateCreation(QDateTime date);
 
 };

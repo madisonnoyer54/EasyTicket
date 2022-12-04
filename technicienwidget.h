@@ -65,12 +65,12 @@ class TechnicienWidget : public QWidget, Observeur
         /// @brief Methode qui permet de définir le modele du logiciel
         ///
         /// @param gestionnaire Modele du logiciel
-        void setGestionnaire(GestionnaireDialogue *gestionnaire);
+        void setGestionnaire(GestionnaireDialogue &gestionnaire);
 
         /// @brief Methode qui permet de définir le technicient qui utilise le logiciel
         ///
         /// @param technicien Technicien qui utilise le logiciel
-        void setTechnicien(Technicien *technicien);
+        void setTechnicien(Technicien &technicien);
 
         /// @brief Methode reagir qui fait
         /// reagir les informations sur le ticket

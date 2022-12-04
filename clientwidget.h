@@ -11,6 +11,7 @@
 #include "observeur.h"
 // Model de la listView
 #include <QStringListModel>
+// Dialog de gestion de ticket
 #include <dialogticket.h>
 
 namespace Ui {
@@ -75,12 +76,12 @@ public:
         /// @brief Methode qui permet de définir le modele du logiciel
         ///
         /// @param gestionnaire Modele du logiciel
-        void setGestionnaire(GestionnaireDialogue *gestionnaire);
+        void setGestionnaire(GestionnaireDialogue &gestionnaire);
 
         /// @brief Methode qui permet de définir le client qui utilise le logiciel
         ///
         /// @param client Client qui utilise le logiciel
-        void setClient(Client *client);
+        void setClient(Client &client);
 
         /// @brief Methode reagir qui fait
         /// reagir la listeView lorsqu'elle est appelée

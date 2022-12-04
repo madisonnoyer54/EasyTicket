@@ -19,19 +19,19 @@ ClientWidget::~ClientWidget()
 void ClientWidget::on_ajouterUnTicket_clicked()
 {
     DialogNouveauTicket *dialog = new DialogNouveauTicket(this);
-    dialog->setClient(client);
-    dialog->setGestionnaire(gestionnaire);
+    dialog->setClient(*client);
+    dialog->setGestionnaire(*gestionnaire);
     dialog->show();
 }
 
-void ClientWidget::setGestionnaire(GestionnaireDialogue *gestionnaire) {
-    this->gestionnaire = gestionnaire;
-    gestionnaire->addObserveur(*this);
+void ClientWidget::setGestionnaire(GestionnaireDialogue &gestionnaire) {
+    this->gestionnaire = &gestionnaire;
+    gestionnaire.addObserveur(*this);
 }
 
-void ClientWidget::setClient(Client *client) {
-    this->client = client;
-    parentWidget()->setWindowTitle("EasyTicket - Client : " + client->getId());
+void ClientWidget::setClient(Client &client) {
+    this->client = &client;
+    parentWidget()->setWindowTitle("EasyTicket - Client : " + client.getId());
     reagir();
 }
 

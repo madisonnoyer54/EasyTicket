@@ -50,12 +50,12 @@ class DialogNouveauTicket : public QDialog
         /// @brief Methode qui permet de définir le modele du logiciel
         ///
         /// @param gestionnaire Modele du logiciel
-        void setGestionnaire(GestionnaireDialogue *gestionnaire);
+        void setGestionnaire(GestionnaireDialogue &gestionnaire);
 
         /// @brief Methode qui permet de définir le client qui utilise le logiciel
         ///
         /// @param client Client qui utilise le logiciel
-        void setClient(Client *client);
+        void setClient(Client &client);
 };
 
 #endif // DIALOGNOUVEAUTICKET_H

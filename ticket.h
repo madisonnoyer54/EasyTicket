@@ -8,6 +8,7 @@
 // Pour définir la classe technicien
 // qui représente le technicien qui gèrera la classe
 #include "technicien.h"
+// Pour que le ticket puisse connaitre son créateur
 #include "client.h"
 // Pour que le ticket connaisse une liste de ticket
 #include "message.h"

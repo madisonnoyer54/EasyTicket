@@ -18,8 +18,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setGestionnaire(GestionnaireDialogue *gestionnaire) {
-    this->gestionnaire = gestionnaire;
+void MainWindow::setGestionnaire(GestionnaireDialogue &gestionnaire) {
+    this->gestionnaire = &gestionnaire;
     connexion->setGestionnaire(gestionnaire);
 }
 
@@ -27,6 +27,7 @@ void MainWindow::setGestionnaire(GestionnaireDialogue *gestionnaire) {
 void MainWindow::on_MainWindow_destroyed() {
 
 }
+
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     std::ignore = event;

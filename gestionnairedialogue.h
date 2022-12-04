@@ -16,11 +16,11 @@
 #include <QSqlQuery>
 /// Permet de gérer les résultats des requetes
 #include <QVariant>
-#include <QDebug>
 /// Permet de gérer les fichiers pour copier la base de donnée en local
 #include <QFile>
 /// Permet de gérer les dossiers pour créer le dossier qui contiendra la base de donnée
 #include <QDir>
+#include <QStandardPaths>
 
 /** @brief La classe GestionnaireDialogue est la classe qui permet d'interagir avec les différents utilisateurs
  **
@@ -66,12 +66,12 @@ class GestionnaireDialogue : public ObjetObserve
         /// ou a le mettre en file d'attente si il faut
         ///
         /// @param ticket Le ticket
-        void assignerTicket(Ticket* ticket);
+        void assignerTicket(Ticket &ticket);
 
         /// @brief La méthode qui permet d'assigner un ticket à un Technicien
         ///
         /// @param technicien Le technicien
-        void assignerTicket(Technicien* technicien);
+        void assignerTicket(Technicien &technicien);
 
         /// @brief La méthode qui permet de fermer une ticket
         ///

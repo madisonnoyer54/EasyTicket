@@ -28,8 +28,8 @@ void ConnexionWidget::on_connexion_clicked()
             ui->errorLabel->setVisible(true);
             ui->errorLabel->setText("Impossible d'identifier le client : " + ui->identifiantText->text());
         } else {
-            clientWidget->setClient(client);
-            clientWidget->setGestionnaire(gestionnaire);
+            clientWidget->setClient(*client);
+            clientWidget->setGestionnaire(*gestionnaire);
             ui->progressBar->setValue(100);
             hide();
             parentWidget()->layout()->addWidget(clientWidget);
@@ -55,8 +55,8 @@ void ConnexionWidget::on_connexion_clicked()
 }
 
 
-void ConnexionWidget::setGestionnaire(GestionnaireDialogue *gestionnaire) {
-    this->gestionnaire = gestionnaire;
+void ConnexionWidget::setGestionnaire(GestionnaireDialogue &gestionnaire) {
+    this->gestionnaire = &gestionnaire;
 }
 
 void ConnexionWidget::on_identifiantText_returnPressed()

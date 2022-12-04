@@ -14,13 +14,13 @@ TechnicienWidget::~TechnicienWidget()
     delete ui;
 }
 
-void TechnicienWidget::setGestionnaire(GestionnaireDialogue *gestionnaire) {
-    this->gestionnaire = gestionnaire;
-    gestionnaire->addObserveur(*this);
+void TechnicienWidget::setGestionnaire(GestionnaireDialogue &gestionnaire) {
+    this->gestionnaire = &gestionnaire;
+    gestionnaire.addObserveur(*this);
 }
 
-void TechnicienWidget::setTechnicien(Technicien *technicien) {
-    this->technicien = technicien;
+void TechnicienWidget::setTechnicien(Technicien &technicien) {
+    this->technicien = &technicien;
 
     // Ajout des catégories pour pouvoir test
     parentWidget()->setWindowTitle("EasyTicket - Technicien : " + technicien->getId());
@@ -30,7 +30,7 @@ void TechnicienWidget::on_fermerTicket_clicked()
 {
     gestionnaire->fermerTicket(*technicien->getTicket());
     technicien->fermerTicket();
-    gestionnaire->assignerTicket(technicien);
+    gestionnaire->assignerTicket(*technicien);
     reagir();
 }
 
@@ -46,11 +46,10 @@ void TechnicienWidget::on_changeCategorie_clicked()
     gestionnaire->changeCategorie(ticket, c);
     ticket.setTechnicien(nullptr);
     technicien->setTicket(nullptr);
-    qDebug() << technicien->peutTraiter(ticket);
     if(technicien->peutTraiter(ticket)) technicien->setTicket(&ticket);
     else {
-        gestionnaire->assignerTicket(&ticket);
-        gestionnaire->assignerTicket(technicien);
+        gestionnaire->assignerTicket(ticket);
+        gestionnaire->assignerTicket(*technicien);
     }
 }
 
