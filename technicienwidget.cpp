@@ -59,7 +59,6 @@ void TechnicienWidget::reagir() {
         desactiver();
     } else {
         activer();
-        afficheDonnee();
     }
 }
 
@@ -117,6 +116,7 @@ void TechnicienWidget::activer() {
     ui->envoyer->setEnabled(true);
     ui->messageList->setEnabled(true);
     ui->assignerTicket->setEnabled(true);
+    if(technicien->getTicket() != nullptr) afficheDonnee();
 }
 
 void TechnicienWidget::on_envoyer_clicked()
@@ -126,11 +126,9 @@ void TechnicienWidget::on_envoyer_clicked()
     reagir();
 }
 
-#include <QtDebug>
-
 void TechnicienWidget::on_assignerTicket_clicked()
 {
-    QVector<Technicien *> techniciens = gestionnaire->getTechniciensPeuventGerer(*technicien->getTicket());
-    for(Technicien *technicien : techniciens) qDebug() << technicien->getId();
+    DialogAssignerTicket *dialog = new DialogAssignerTicket(*technicien->getTicket(), *gestionnaire, *this, this);
+    dialog->show();
 }
 

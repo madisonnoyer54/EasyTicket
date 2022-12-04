@@ -344,5 +344,11 @@ QVector<Technicien *> &GestionnaireDialogue::getTechniciensPeuventGerer(Ticket &
 void GestionnaireDialogue::assignerTicket(Technicien &technicien, Ticket &ticket) {
     QSqlQuery query;
 
+    Technicien &ancienTechnicien = *ticket.getTechnicien();
+    ticket.setTechnicien(&technicien);
     query.exec("UPDATE Ticket SET idTechnicien = '" + technicien.getId() + "' WHERE idTicket = " + ticket.getIdTicket());
+    ancienTechnicien.setTicket(nullptr);
+    assignerTicket(ancienTechnicien);
+
+    notifier();
 }

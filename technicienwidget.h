@@ -9,6 +9,7 @@
 #include "observeur.h"
 // Permet de gérer la liste des messages
 #include <QStringListModel>
+#include "dialogassignerticket.h"
 
 namespace Ui {
 class TechnicienWidget;

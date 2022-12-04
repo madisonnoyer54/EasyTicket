@@ -20,6 +20,7 @@ SOURCES += \
     categorie.cpp \
     clientwidget.cpp \
     connexionwidget.cpp \
+    dialogassignerticket.cpp \
     dialognouveauticket.cpp \
     dialogticket.cpp \
     main.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     administrateur.h \
     clientwidget.h \
     connexionwidget.h \
+    dialogassignerticket.h \
     dialognouveauticket.h \
     dialogticket.h \
     mainwindow.h \
@@ -54,6 +56,7 @@ HEADERS += \
 FORMS += \
     clientwidget.ui \
     connexionwidget.ui \
+    dialogassignerticket.ui \
     dialognouveauticket.ui \
     dialogticket.ui \
     mainwindow.ui \
