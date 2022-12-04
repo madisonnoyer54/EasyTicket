@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     administrateur.cpp \
+    administrateurwidget.cpp \
     categorie.cpp \
     clientwidget.cpp \
     connexionwidget.cpp \
@@ -36,6 +37,7 @@ SOURCES += \
 
 HEADERS += \
     administrateur.h \
+    administrateurwidget.h \
     clientwidget.h \
     connexionwidget.h \
     dialogassignerticket.h \
@@ -54,6 +56,7 @@ HEADERS += \
     utilisateur.h
 
 FORMS += \
+    administrateurwidget.ui \
     clientwidget.ui \
     connexionwidget.ui \
     dialogassignerticket.ui \

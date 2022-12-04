@@ -15,6 +15,8 @@ ConnexionWidget::~ConnexionWidget()
     delete ui;
 }
 
+#include "administrateurwidget.h"
+
 void ConnexionWidget::on_connexion_clicked()
 {
     ui->progressBar->setVisible(true);
@@ -27,6 +29,7 @@ void ConnexionWidget::on_connexion_clicked()
             ui->progressBar->setVisible(false);
             ui->errorLabel->setVisible(true);
             ui->errorLabel->setText("Impossible d'identifier le client : " + ui->identifiantText->text());
+            ui->progressBar->setValue(0);
         } else {
             clientWidget->setClient(*client);
             clientWidget->setGestionnaire(*gestionnaire);
@@ -44,6 +47,7 @@ void ConnexionWidget::on_connexion_clicked()
             ui->progressBar->setVisible(false);
             ui->errorLabel->setVisible(true);
             ui->errorLabel->setText("Impossible d'identifier le technicien : " + ui->identifiantText->text());
+            ui->progressBar->setValue(0);
         } else {
             technitienWidget->setTechnicien(*technicien);
             technitienWidget->setGestionnaire(*gestionnaire);
@@ -53,11 +57,19 @@ void ConnexionWidget::on_connexion_clicked()
         }
     }
     if(ui->Administrateur->isChecked()) {
+        ui->progressBar->setValue(30);
         Administrateur *administrateur = gestionnaire->getAdministrateur(ui->identifiantText->text());
+        ui->progressBar->setValue(60);
         if(administrateur == nullptr) {
             ui->progressBar->setVisible(false);
             ui->errorLabel->setVisible(true);
             ui->errorLabel->setText("Impossible d'identifier l'administrateur : " + ui->identifiantText->text());
+            ui->progressBar->setValue(0);
+        } else {
+            AdministrateurWidget *widget = new AdministrateurWidget(*administrateur, *gestionnaire, this);
+            ui->progressBar->setValue(100);
+            hide();
+            parentWidget()->layout()->addWidget(widget);
         }
     }
 }
