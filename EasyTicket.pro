@@ -71,4 +71,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    database.qrc
+    database.qrc \
+    icon.qrc
+
+RC_ICONS = icon.ico
