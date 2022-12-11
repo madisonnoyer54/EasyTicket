@@ -122,9 +122,13 @@ class GestionnaireDialogue : public ObjetObserve
         /// @param ticket Référence vers un ticket
         void assignerTicket(Technicien &technicien, Ticket &ticket);
 
-        int getNbTicket();
-        int getNbTicketFerme();
-        int getNbTicket(Categorie categorie);
+        int getNbTicket(QDate debut, QDate fin);
+        int getNbTicketFerme(QDate debut, QDate fin);
+        int getNbTicket(Categorie categorie, QDate debut, QDate fin);
+        int getNbTicketFerme(Categorie categorie, QDate debut, QDate fin);
+        int getNbTechnicien(Categorie categorie);
+        int getNbTicketTraitement(QDate debut, QDate fin);
+        int getNbTicketTraitement(Categorie categorie, QDate debut, QDate fin);
 
     private:
 

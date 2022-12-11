@@ -25,9 +25,15 @@ private slots:
 
     void on_securite_clicked();
 
+    void on_dateAvant_userDateChanged(const QDate &date);
+
+    void on_dateApres_userDateChanged(const QDate &date);
+
 private:
     Ui::AdministrateurWidget *ui;
     GestionnaireDialogue &gestionnaire;
+
+    void reagir();
 };
 
 #endif // ADMINISTRATEURWIDGET_H

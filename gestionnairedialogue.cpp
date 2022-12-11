@@ -377,24 +377,52 @@ void GestionnaireDialogue::assignerTicket(Technicien &technicien, Ticket &ticket
     notifier();
 }
 
+int GestionnaireDialogue::getNbTicket(QDate debut, QDate fin) {
 
-int GestionnaireDialogue::getNbTicket() {
     QSqlQuery query;
-    query.exec("SELECT count(*) FROM Ticket");
+    query.exec("SELECT count(*) FROM Ticket WHERE dateCreation >= date('" + debut.toString("yyyy-MM-dd") + "') AND dateCreation <= date('" + fin.toString("yyyy-MM-dd") + "')");
     query.first();
     return query.value(0).toInt();
 }
 
-int GestionnaireDialogue::getNbTicketFerme() {
+int GestionnaireDialogue::getNbTicketFerme(QDate debut, QDate fin) {
     QSqlQuery query;
-    query.exec("SELECT count(*) FROM Ticket WHERE ouvert = 1");
+    query.exec("SELECT count(*) FROM Ticket WHERE ouvert = 1 AND dateCreation >= date('" + debut.toString("yyyy-MM-dd") + "') AND dateCreation <= date('" + fin.toString("yyyy-MM-dd") + "')");
     query.first();
     return query.value(0).toInt();
 }
 
-int GestionnaireDialogue::getNbTicket(Categorie categorie) {
+int GestionnaireDialogue::getNbTicket(Categorie categorie, QDate debut, QDate fin) {
     QSqlQuery query;
-    query.exec("SELECT count(*) FROM Ticket WHERE UPPER(nomCategorie) = UPPER('" + categorie_to_str(categorie) + "')");
+    query.exec("SELECT count(*) FROM Ticket WHERE UPPER(nomCategorie) = UPPER('" + categorie_to_str(categorie) + "') AND dateCreation >= date('" + debut.toString("yyyy-MM-dd") + "') AND dateCreation <= date('" + fin.toString("yyyy-MM-dd") + "')");
+    query.first();
+    return query.value(0).toInt();
+}
+
+int GestionnaireDialogue::getNbTicketFerme(Categorie categorie, QDate debut, QDate fin) {
+    QSqlQuery query;
+    query.exec("SELECT count(*) FROM Ticket WHERE ouvert = 1 AND UPPER(nomCategorie) = UPPER('" + categorie_to_str(categorie) + "') AND dateCreation >= date('" + debut.toString("yyyy-MM-dd") + "') AND dateCreation <= date('" + fin.toString("yyyy-MM-dd") + "')");
+    query.first();
+    return query.value(0).toInt();
+}
+
+int GestionnaireDialogue::getNbTechnicien(Categorie categorie) {
+    QSqlQuery query;
+    query.exec("SELECT COUNT(*) FROM Technicien JOIN Peut_gerer WHERE idUtilisateur = idTechnicien AND nomCategorie = '" + categorie_to_str(categorie) + "'");
+    query.first();
+    return query.value(0).toInt();
+}
+
+int GestionnaireDialogue::getNbTicketTraitement(QDate debut, QDate fin) {
+    QSqlQuery query;
+    query.exec("SELECT count(*) FROM Ticket WHERE idTechnicien IS NOT NULL AND dateCreation >= date('" + debut.toString("yyyy-MM-dd") + "') AND dateCreation <= date('" + fin.toString("yyyy-MM-dd") + "')");
+    query.first();
+    return query.value(0).toInt();
+}
+
+int GestionnaireDialogue::getNbTicketTraitement(Categorie categorie, QDate debut, QDate fin) {
+    QSqlQuery query;
+    query.exec("SELECT count(*) FROM Ticket WHERE idTechnicien IS NOT NULL AND UPPER(nomCategorie) = UPPER('" + categorie_to_str(categorie) + "') AND dateCreation >= date('" + debut.toString("yyyy-MM-dd") + "') AND dateCreation <= date('" + fin.toString("yyyy-MM-dd") + "')");
     query.first();
     return query.value(0).toInt();
 }

@@ -9,10 +9,7 @@ AdministrateurWidget::AdministrateurWidget(Administrateur &admin, GestionnaireDi
     ui->setupUi(this);
     ui->name->setText(admin.getId());
 
-    int nbTicket = gestionnaire.getNbTicket();
-    ui->nbTicket->setText(ui->nbTicket->text() + " " + QString::number(nbTicket));
-    ui->nbTicketOuvert->setText(ui->nbTicketOuvert->text() + " " + QString::number((float)gestionnaire.getNbTicketFerme() / (float) nbTicket * 100) + "%");
-    on_assistance_clicked();
+    reagir();
 }
 
 AdministrateurWidget::~AdministrateurWidget()
@@ -22,24 +19,69 @@ AdministrateurWidget::~AdministrateurWidget()
 
 void AdministrateurWidget::on_assistance_clicked()
 {
-    ui->nbTicketCateg->setText("Nombre de ticket dans la catégorie Assistance : " + QString::number(gestionnaire.getNbTicket(Categorie::assistance)));
+    reagir();
 }
 
 
 void AdministrateurWidget::on_logiciel_clicked()
 {
-    ui->nbTicketCateg->setText("Nombre de ticket dans la catégorie Logiciel : " + QString::number(gestionnaire.getNbTicket(Categorie::logiciel)));
+    reagir();
 }
 
 
 void AdministrateurWidget::on_materiel_clicked()
 {
-    ui->nbTicketCateg->setText("Nombre de ticket dans la catégorie Materiel : " + QString::number(gestionnaire.getNbTicket(Categorie::materiel)));
+    reagir();
 }
 
 
 void AdministrateurWidget::on_securite_clicked()
 {
-    ui->nbTicketCateg->setText("Nombre de ticket dans la catégorie Securite : " + QString::number(gestionnaire.getNbTicket(Categorie::securite)));
+    reagir();
 }
 
+
+void AdministrateurWidget::on_dateAvant_userDateChanged(const QDate &date)
+{
+    std::ignore = date;
+    reagir();
+}
+
+
+void AdministrateurWidget::on_dateApres_userDateChanged(const QDate &date)
+{
+    std::ignore = date;
+    reagir();
+}
+
+void AdministrateurWidget::reagir() {
+    QDate debut = ui->dateAvant->date();
+    QDate fin = ui->dateApres->date();
+
+    int nbTicket = gestionnaire.getNbTicket(debut, fin);
+    ui->nbTicket->setText("Nombre de ticket : " + QString::number(nbTicket));
+
+    if(nbTicket != 0) {
+        ui->nbTicketOuvert->setText("Pourcentage de ticket ouvert " + QString::number((float)gestionnaire.getNbTicketFerme(debut, fin) / (float) nbTicket * 100) + "%");
+        ui->nbTicketEnTraitement->setText("Pourcentage de ticket en traitement " + QString::number((float)gestionnaire.getNbTicketTraitement(debut, fin) / (float) nbTicket * 100) + "%");
+    } else {
+        ui->nbTicketOuvert->setText("Pourcentage de ticket ouvert 0%");
+                ui->nbTicketEnTraitement->setText("Pourcentage de ticket en traitement 0%");
+    }
+
+    Categorie c = Categorie::assistance;
+    if (ui->securite->isChecked()) c = Categorie::securite;
+    else if (ui->materiel->isChecked()) c = Categorie::materiel;
+    else if (ui->logiciel->isChecked()) c = Categorie::logiciel;
+
+    int nbTicketCateg = gestionnaire.getNbTicket(c, debut, fin);
+    ui->nbTicketCateg->setText("Nombre de ticket dans la catégorie " + categorie_to_str(c) + " : " + QString::number(nbTicketCateg));
+    ui->nbTech->setText("Nombre de Technicien : " + QString::number(gestionnaire.getNbTechnicien(c)));
+    if(nbTicketCateg != 0) {
+        ui->nbTicketOuvertCateg->setText("Pourcentage de ticket ouvert dans la catégorie " + categorie_to_str(c) + " : " + QString::number((float)gestionnaire.getNbTicketFerme(c, debut, fin) / (float) nbTicketCateg * 100) + "%");
+        ui->nbTraitementCateg->setText("Pourcentage de ticket en traitement dans la catégorie " + categorie_to_str(c) + " : " + QString::number((float)gestionnaire.getNbTicketTraitement(c, debut, fin) / (float) nbTicketCateg * 100) + "%");
+    } else {
+        ui->nbTicketOuvertCateg->setText("Pourcentage de ticket ouvert dans la catégorie " + categorie_to_str(c) + " : 0%");
+        ui->nbTraitementCateg->setText("Pourcentage de ticket en traitement dans la catégorie " + categorie_to_str(c) + " : 0%");
+    }
+}
