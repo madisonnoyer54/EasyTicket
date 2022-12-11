@@ -74,4 +74,4 @@ RESOURCES += \
     database.qrc \
     icon.qrc
 
-RC_ICONS = icon.ico
+ICON = icon.ico
