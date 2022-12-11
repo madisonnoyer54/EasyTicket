@@ -73,5 +73,3 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     database.qrc \
     icon.qrc
-
-ICON = icon.ico

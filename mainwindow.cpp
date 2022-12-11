@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     connexion = new ConnexionWidget(this);
     //connexion->show();
     centralWidget()->layout()->addWidget(connexion);
+    QMainWindow::setWindowIcon(QIcon(":/ressources/icon/icon.ico"));
 }
 
 MainWindow::~MainWindow()
